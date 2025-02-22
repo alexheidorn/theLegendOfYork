@@ -1,12 +1,7 @@
 local tileTable, tileset, tileWidth, tileHeight, quads, quad
 
 function LoadMap(path)
-    tileTable = {}
-    local file = love.filesystem.newFile(path)
-    for line in file:lines() do
-      table.insert(tileTable, line)
-    end
-    file:close()
+    love.filesystem.newFile(path) ()
 end
 
 function CreateMap(tileW, tileH, tileSetPath, quadInfo, tileString)
