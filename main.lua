@@ -1,5 +1,5 @@
 function love.load()
-    
+    LoadMap("assets/map.txt")
 end
 
 function love.update(dt)
