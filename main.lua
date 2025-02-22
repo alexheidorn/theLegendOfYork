@@ -1,5 +1,5 @@
 function love.load()
-    LoadMap("assets/map.txt")
+    -- LoadMap('assets/maps/map.txt')
 
     -- lab tilset
     local labQuadInfo = {
@@ -8,7 +8,7 @@ function love.load()
         {'<', 32, 32},
         {'^', 64, 32}
     }
-    CreateMap(32, 32, "assets/tilesets/lab.png", quadInfo, "assets/maps/map.txt")
+    CreateMap(32, 32, 'assets/tilesets/lab.png', labQuadInfo, 'assets/maps/map.txt')
 end
 
 function love.update(dt)
@@ -16,7 +16,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    drawMap()
+    DrawMap()
     love.graphics.print("Hello worlf!")
 end
 
