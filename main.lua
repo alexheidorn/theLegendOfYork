@@ -1,9 +1,7 @@
 require 'lib/map-functions'
 
 function love.load()
-    -- LoadMap('/assets/maps/map.txt')
-
-    -- lab tilset
+    -- lab tileset
     local labQuadInfo = {
         {' ', 0, 0},
         {'*', 0, 32},
