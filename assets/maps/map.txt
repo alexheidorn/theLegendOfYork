@@ -1,22 +1,22 @@
-***************
-*             *
-*   closet    *
-*             *
-*****     *************
-*                     ************
-*   landing area      <       <  *
-*                     ******     *
-*     ****************     *  ^  *
-*     *                    *     *
-*     ************     *****  ^  ******
-*                 *     *             *
-*   Basement      *******    Slide    *
-*                            Room     *
-*                 *******             *
-*                 *     *             *
-*     ************     ****************
-*     *                      *    *
-*     ************     ***** *    *****
+***************xxxxxxxxxxxxxxxxxxxxxxxxx
+*             *xxxxxxxxxxxxxxxxxxxxxxxxx
+*   closet    *xxxxxxxxxxxxxxxxxxxxxxxxx
+*             *xxxxxxxxxxxxxxxxxxxxxxxxx
+*****     *************xxxxxxxxxxxxxxxxx
+*                     ************xxxxxx
+*   landing area      <       <  *xxxxxx
+*                     ******     *xxxxxx
+*     ****************     *  ^  *xxxxxx
+*     *                    *     *xxxxxx
+*     ************     *****  ^  ******x
+*                 *     *              *
+*   Basement      *******    Slide     *
+*                            Room      *
+*                 *******              *
+*                 *     *              *
+*     ************     *****************
+*     *                      *    *xxxxx
+*     ************     ***** *    ******
 *                 ***** *              *
 *    Troll                  Guest      *
 *    Room         ***** *   Room       *
