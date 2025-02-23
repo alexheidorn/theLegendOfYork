@@ -1,14 +1,14 @@
 local tileset = [[
-***************
-*             *
-*   closet    *
-*             *
-*****     *************
-*                     ************
-*   landing area      <       <  *
-*                     ******     *
-*     ****************     *  ^  *
-*     *                    *     *
+***************xxxxxxxxxxxxxxxxxxxxxxxx
+*             *xxxxxxxxxxxxxxxxxxxxxxxx
+*   closet    *xxxxxxxxxxxxxxxxxxxxxxxx
+*             *xxxxxxxxxxxxxxxxxxxxxxxx
+*****     *************xxxxxxxxxxxxxxxx
+*                     ************xxxxx
+*   landing area      <       <  *xxxxx
+*                     ******     *xxxxx
+*     ****************     *  ^  *xxxxx
+*     *                    *     *xxxxx
 *     ************     *****  ^  ******
 *                 *     *             *
 *   Basement      *******    Slide    *
@@ -17,7 +17,7 @@ local tileset = [[
 *                 *     *             *
 *     ************     ****************
 *     *                      *    *
-*     ************     ***** *    *****
+*     ************     ***** *    ******
 *                 ***** *              *
 *    Troll                  Guest      *
 *    Room         ***** *   Room       *
