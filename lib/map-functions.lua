@@ -20,6 +20,7 @@ function CreateMap(tileW, tileH, tileSetPath, quadInfo, tileString)
   tileTable = {}
 
   local mapWidth = #tileString:match("[^\n]+")
+  print(mapWidth)
   for line in tileString:gmatch("[^\n]+") do
     assert(#line == mapWidth, 'Map is not aligned: width of row ' .. tostring(rowIndex) .. ' should be ' .. tostring(mapWidth) .. ', but it is ' .. tostring(#line))
     local row = {}
