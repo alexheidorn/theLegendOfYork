@@ -10,7 +10,7 @@ function love.load()
         {'~', 128, 0},
     }
     local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
-    CreateMap(32, 32, 'assets/tilesets/lab.png', labQuadInfo, mapTxtFile)
+    CreateMap(32, 32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile)
     -- LoadMap('assets/maps/map.lua')
 end
 
