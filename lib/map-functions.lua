@@ -1,18 +1,21 @@
 local tileTable, tileset, tileWidth, tileHeight, quads, quad
 
 function LoadMap(path)
-    love.filesystem.newFile(path) ()
+    love.filesystem.load(path) ()
 end
 
 function CreateMap(tileW, tileH, tileSetPath, quadInfo, tileString)
+    tileset = love.graphics.newImage(tileSetPath)
     tileWidth = tileW
     tileHeight = tileH
     local sheetWidth, sheetHeight = tileset:getWidth(), tileset:getHeight()
     
     quads = {}
-    for i = 1, #quadInfo do
-      quads[i] = love.graphics.newQuad(quadInfo[i][1], quadInfo[i][2], quadInfo[i][3], quadInfo[i][4], tileset:getWidth(), tileset:getHeight())
+    for _, info in ipairs(quadInfo) do
+      -- info[1] = char, info[2] = x, info[3] = y
+      quads[info[1]] = love.graphics.newQuad(info[2], info[3], tileWidth, tileHeight, sheetWidth, sheetHeight)
     end
+
 
     tileTable = {}
 
