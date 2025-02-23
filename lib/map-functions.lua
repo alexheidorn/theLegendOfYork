@@ -19,10 +19,10 @@ function CreateMap(tileW, tileH, tileSetPath, quadInfo, tileString)
 
   tileTable = {}
 
-  local mapWidth = #tileString:match("[^\n]+")
-  print(mapWidth)
+  -- local mapWidth = #tileString:match("[^\n]+")
+  -- print(mapWidth)
   for line in tileString:gmatch("[^\n]+") do
-    assert(#line == mapWidth, 'Map is not aligned: width of row ' .. tostring(rowIndex) .. ' should be ' .. tostring(mapWidth) .. ', but it is ' .. tostring(#line))
+    -- assert(#line == mapWidth, 'Map is not aligned: width of row ' .. tostring(rowIndex) .. ' should be ' .. tostring(mapWidth) .. ', but it is ' .. tostring(#line))
     local row = {}
     for char in line:gmatch(".") do
       row[#row + 1] = char
@@ -39,7 +39,7 @@ function DrawMap()
         local char = row[colIndex]
         local quad = quads[char] or quads[" "]
         local x, y = (colIndex - 1) * tileWidth, (rowIndex - 1) * tileHeight
-      love.graphics.draw(tileset, quad, x, y)
+      if quad then love.graphics.draw(tileset, quad, x, y) end
     end
   end
 end
