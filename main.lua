@@ -10,7 +10,8 @@ function love.load()
         {'<', 32, 32},
         {'^', 64, 32}
     }
-    CreateMap(32, 32, 'assets/tilesets/lab.png', labQuadInfo, 'assets/maps/map.txt')
+    local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
+    CreateMap(32, 32, 'assets/tilesets/lab.png', labQuadInfo, mapTxtFile)
     -- LoadMap('assets/maps/map.lua')
 end
 
