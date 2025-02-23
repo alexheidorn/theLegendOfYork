@@ -33,4 +33,4 @@ local labQuadInfo = {
     {'^', 64, 32}
 }
 
-CreateMap(32, 32, './tilesets/lab.png', labQuadInfo, tileset)
+CreateMap(32, 32, 'assets/tilesets/lab.png', labQuadInfo, tileset)
