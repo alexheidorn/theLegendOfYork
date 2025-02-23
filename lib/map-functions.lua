@@ -33,8 +33,8 @@ function DrawMap()
     for rowIndex = 1, #tileTable do
         local row = tileTable[rowIndex]
         for columnIndex = 1, #row do
-          local number = row[columnIndex]
-          local quad = quads[number]
+          local char = row[columnIndex]
+          local quad = quads[char]
           local x, y = (columnIndex - 1) * tileWidth, (rowIndex - 1) * tileHeight
           love.graphics.draw(tileset, quad, x, y)
         end
