@@ -9,6 +9,10 @@ local spriteWidth, spriteHeight, spriteSheet, spritesheetWidth, spritesheetHeigh
 local rotation = math.rad(90)
 local x, y = love.graphics.getWidth() / 2, love.graphics.getHeight() / 2
 
+function LoadSprite(path)
+    love.filesystem.load(path) ()
+end
+
 function CreateSprite(spriteW, spriteH, spriteSheetPath, frameInfo)
 	-- sprite = love.graphics.newImage("assets/sprites/character.png")
 	spriteSheet = love.graphics.newImage(spriteSheetPath)
