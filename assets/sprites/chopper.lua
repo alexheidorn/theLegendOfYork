@@ -1,4 +1,4 @@
-local chopper = love.graphics.newImage("assets/pictureAttackChoppers_thumb.png")
+-- local chopper = love.graphics.newImage("assets/pictureAttackChoppers_thumb.png")
 
 local frameInfo = {
 	{ 1, 0, 0 },
@@ -10,4 +10,4 @@ local frameInfo = {
 
 }
 
-return CreateSprite(128, 64, "assets/spritesheets/pictureAttackChoppers.png", frameInfo)
+ CreateSprite(128, 64, "assets/spritesheets/pictureAttackChoppers_thumb.png", frameInfo)
