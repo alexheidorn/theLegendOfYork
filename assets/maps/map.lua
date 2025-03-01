@@ -1,36 +1,10 @@
-local tileset = [[
-***************xxxxxxxxxxxxxxxxxxxxxxxx
-*             *xxxxxxxxxxxxxxxxxxxxxxxx
-*   closet    *xxxxxxxxxxxxxxxxxxxxxxxx
-*             *xxxxxxxxxxxxxxxxxxxxxxxx
-*****     *************xxxxxxxxxxxxxxxx
-*                     ************xxxxx
-*   landing area      <       <  *xxxxx
-*                     ******     *xxxxx
-*     ****************     *  ^  *xxxxx
-*     *                    *     *xxxxx
-*     ************     *****  ^  ******
-*                 *     *             *
-*   Basement      *******    Slide    *
-*                            Room     *
-*                 *******             *
-*                 *     *             *
-*     ************     ****************
-*     *                      *    *
-*     ************     ***** *    ******
-*                 ***** *              *
-*    Troll                  Guest      *
-*    Room         ***** *   Room       *
-*                 *     *              *
-*******************     ****************
-]]
-
--- lab tilset
+-- lab tileset
 local labQuadInfo = {
     {' ', 0, 0},
     {'*', 0, 32},
     {'<', 32, 32},
-    {'^', 64, 32}
+    {'^', 64, 32},
+    {'~', 128, 0},
 }
-
-CreateMap(32, 32, 'assets/tilesets/lab.png', labQuadInfo, tileset)
+local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
+CreateMap(32, 32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile)
