@@ -1,25 +1,20 @@
 require 'lib/map-functions'
+require 'lib/sprite-functions'
 
+local map, chopper
 function love.load()
-    -- lab tileset
-    local labQuadInfo = {
-        {' ', 0, 0},
-        {'*', 0, 32},
-        {'<', 32, 32},
-        {'^', 64, 32},
-        {'~', 128, 0},
-    }
-    local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
-    CreateMap(32, 32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile)
     -- LoadMap('assets/maps/map.lua')
+    map = LoadMap('assets/maps/map.lua')
+    chopper = LoadSprite('assets/sprites/chopper.lua')
 end
 
 function love.update(dt)
-    
+    updateSprite(dt)    
 end
 
 function love.draw()
     DrawMap()
+    drawSprite()
     love.graphics.print("Hello worlf!")
 end
 
