@@ -1,11 +1,10 @@
 require 'lib/map-functions'
 require 'lib/sprite-functions'
 
-local map, chopper
 function love.load()
     -- LoadMap('assets/maps/map.lua')
-    map = LoadMap('assets/maps/map.lua')
-    chopper = LoadSprite('assets/sprites/chopper.lua')
+    LoadMap('assets/maps/map.lua')
+    chopper = require 'assets.sprites.chopper'
 end
 
 function love.update(dt)
