@@ -37,32 +37,15 @@ local elapsedTime = 0
 function updateSprite(dt)
 	elapsedTime = elapsedTime + dt
 	
-	if elapsedTime > 0.1 then
-		currentFrame = currentFrame + 1
-		if currentFrame > #frames then
-			currentFrame = 1
-		end
-		activeFrame = frames[currentFrame]
-		elapsedTime = 0
-	end 
-	if elapsedTime > 1/ 60 then -- rotate every frame
-		rotation = rotation + math.rad(5)
-	end
-
-	-- polling-based keyboard input
-	if love.keyboard.isDown("a") then
-		x = x - 100 * dt
-	end
-
-	if love.keyboard.isDown("d") then
-		x = x + 100 * dt
-	end
-
-	if love.keyboard.isDown("w") then
-		y = y - 100 * dt
-	end
-
-	if love.keyboard.isDown("s") then
-		y = y + 100 * dt
-	end
+	-- if elapsedTime > 0.1 then
+	-- 	currentFrame = currentFrame + 1
+	-- 	if currentFrame > #frames then
+	-- 		currentFrame = 1
+	-- 	end
+	-- 	activeFrame = frames[currentFrame]
+	-- 	elapsedTime = 0
+	-- end 
+	-- if elapsedTime > 1/ 60 then -- rotate every frame
+	-- 	rotation = rotation + math.rad(5)
+	-- end
 end
