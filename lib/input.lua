@@ -1,6 +1,7 @@
-Input = {}
+-- Class
+Input = Object:extend()
 
-function Input.handleKeyboard(player, dt, joystick)
+function Input:handleInput(player, dt, joystick)
     local moveX, moveY = 0, 0
 
     -- gamepad input
