@@ -1,12 +1,35 @@
-function Game()
-end
+-- Class
+Game = Object:extend()
 
-function Game.load()
-    Joysticks = love.joystick.getJoysticks()
-    if #Joysticks > 0 then
-        Joystick = Joysticks[1]
+function Game:load()
+    -- initialize game componenets
+    self.player = Player(64, 64) --starting positon
+    self.input = Input() -- instance of Input class
+
+    -- controller detection
+    self.joystick = nil
+    local joysticks = love.joystick.getJoysticks()
+    if #joysticks > 0 then
+        self.joystick = joysticks[1]
     end
 end
+
+
+function Game:update(dt)
+    self.input:handleInput(self.player, dt, self.joystick)
+end
+
+function Game:draw()
+    -- Map:draw()
+    self.player:draw()
+end
+
+-- function Game:keypressed(key)
+--     self.input:handleKeyboard(key, self.player)
+--     if key == "escape" then
+--         love.event.quit()
+--     end
+-- end
 
 function love.gamepadpressed(joystick, button)
     print("Gamepad button " .. button .. " was pressed on " .. joystick:getGamepadName(
@@ -22,9 +45,6 @@ function love.gamepadaxis(joystick, axis, value)
     if math.abs(value) > 0.2 then -- Deadzone to ignore small movements
         print("Gamepad axis " .. axis .. " moved to " .. value)
     end
-end
-
-function Game:update(dt)
 end
 
 function TitleScreen()
