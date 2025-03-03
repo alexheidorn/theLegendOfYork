@@ -1,7 +1,27 @@
 function Game()
 end
 
-function Game:load()
+function Game.load()
+    Joysticks = love.joystick.getJoysticks()
+    if #Joysticks > 0 then
+        Joystick = Joysticks[1]
+    end
+end
+
+function love.gamepadpressed(joystick, button)
+    print("Gamepad button " .. button .. " was pressed on " .. joystick:getGamepadName(
+        joystick
+    ))
+end
+
+function love.gamepadreleased(joystick, button)
+    print("Gamepad button released:", button)
+end
+
+function love.gamepadaxis(joystick, axis, value)
+    if math.abs(value) > 0.2 then -- Deadzone to ignore small movements
+        print("Gamepad axis " .. axis .. " moved to " .. value)
+    end
 end
 
 function Game:update(dt)
