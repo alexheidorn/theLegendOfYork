@@ -10,6 +10,7 @@ function Game:load()
     self.joystick = nil
     local joysticks = love.joystick.getJoysticks()
     if #joysticks > 0 then
+        print("Found " .. #joysticks .. " joystick(s)")
         self.joystick = joysticks[1]
     end
 end
