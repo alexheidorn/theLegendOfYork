@@ -1,8 +1,15 @@
-Object = require 'lib/object' 
+-- main.lua
+Object = require 'lib/classic' 
 require 'lib/map-functions'
 require 'lib/sprite-functions'
+
 require 'game'
 require 'lib.input'
+require 'resources.entity'
+require 'resources.player'
+-- require 'lib.map'
+
+
 
 local map, chopper
 function love.load()
