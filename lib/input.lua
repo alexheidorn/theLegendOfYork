@@ -27,20 +27,3 @@ function Input.handleKeyboard(player, dt, joystick)
     -- apply movement
     player:move(moveX, moveY, dt)
 end
-
--- polling-based keyboard input
-if love.keyboard.isDown("a") then
-    self.x = self.x - 100 * dt
-end
-
-if love.keyboard.isDown("d") then
-    self.x = self.x + 100 * dt
-end
-
-if love.keyboard.isDown("w") then
-    self.y = self.y - 100 * dt
-end
-
-if love.keyboard.isDown("s") then
-    self.y = self.y + 100 * dt
-end
