@@ -24,17 +24,18 @@ function Game:draw()
     self.player:draw()
 end
 
--- function Game:keypressed(key)
---     self.input:handleKeyboard(key, self.player)
---     if key == "escape" then
---         love.event.quit()
---     end
--- end
+function Game:keypressed(key)
+    self.input:handleKeyboard(key, self.player)
+    if key == "escape" then
+        love.event.quit()
+    end
+end
 
-function love.gamepadpressed(joystick, button)
+function Game:gamepadpressed(joystick, button)
     print("Gamepad button " .. button .. " was pressed on " .. joystick:getGamepadName(
         joystick
     ))
+    self.input:handleGamepad(button, self.player, joystick)
 end
 
 function love.gamepadreleased(joystick, button)
