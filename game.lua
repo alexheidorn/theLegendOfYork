@@ -3,7 +3,7 @@ Game = Object:extend()
 
 function Game:load()
     -- initialize game componenets
-    self.player = Player(64, 64) --starting positon
+    -- self.player = Player(64, 64) --starting positon
     self.input = Input() -- instance of Input class
 
     -- controller detection

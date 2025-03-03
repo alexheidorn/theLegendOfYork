@@ -18,6 +18,7 @@ function Input:handleInput(player, dt, joystick)
     if love.keyboard.isDown("d") or love.keyboard.isDown("right") then moveX = moveX + 1 end
     if love.keyboard.isDown("w") or love.keyboard.isDown("up") then moveY = moveY - 1 end
     if love.keyboard.isDown("s") or love.keyboard.isDown("down") then moveY = moveY + 1 end
+    
 
     -- normalize diagonal movement
     if moveX ~= 0 and moveY ~= 0 then
@@ -26,5 +27,5 @@ function Input:handleInput(player, dt, joystick)
     end
 
     -- apply movement
-    player:move(moveX, moveY, dt)
+    -- player:move(moveX, moveY, dt)
 end
