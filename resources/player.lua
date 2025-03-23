@@ -29,10 +29,6 @@ function Player:new(x, y)
         -- walk
         -- attack
     }
-    self.currentAnimation = self.animations.idle
-
-    
-
 end
 
 function Player:move(moveX, moveY, dt)
