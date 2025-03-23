@@ -14,7 +14,10 @@ Player = Entity:extend()
 
 function Player:new(x, y)
     self.spriteSheetPath = "assets/spritesheets/funny-pixelated-character/preview.jpg"
-    self.spriteSheet = love.graphics.newImage(self.spriteSheetPath)
+    Player.super.new(self, x, y, self.spriteSheetPath, 172, 332)
+    self.speed = 100
+    self.state = 'idle'
+    
     self.animations = {
         -- frame info for each animation
         idle = {
@@ -28,9 +31,7 @@ function Player:new(x, y)
     }
     self.currentAnimation = self.animations.idle
 
-    Player.super.new(self, x, y, self.spriteSheetPath, 172, 332)
-    self.speed = 100
-    self.state = 'idle'
+    
 
 end
 
@@ -49,6 +50,7 @@ function Player:move(moveX, moveY, dt)
 
     -- self.x = newX
     -- self.y = newY
+    Player.super.move(self, moveX, moveY, dt)
 end
 
 function Player:attack(target)
@@ -60,14 +62,6 @@ function Player:interact()
     -- Perform interaction logic here
     print("Interacting with something")
     
-end
-
-function Player:update(dt)
-    self.animation:update(dt)
-end
-
-function Player:draw()
-    self.animation:draw(self.x, self.y)
 end
 
 return Player
