@@ -18,6 +18,7 @@ end
 
 function Game:update(dt)
     self.input:handleInput(self.player, dt, self.joystick)
+    self.player:update(dt)
 end
 
 function Game:draw()

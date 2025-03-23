@@ -25,6 +25,7 @@ end
 
 function love.draw()
     DrawMap()
+    Game:draw()
     love.graphics.print("Hello worlf!")
 end
 
