@@ -3,8 +3,8 @@
 
 Animation = Object:extend()
 
-function Animation:new(spriteSheet, frameWidth, frameHeight, frameDuration, frameInfo)
-    self.spriteSheet = love.graphics.newImage(spriteSheet)
+function Animation:new(spriteSheet, frameWidth, frameHeight, frameInfo, frameCount, frameDuration)
+    self.spriteSheet = spriteSheet
     self.spritesheetWidth, self.spritesheetHeight = self.spriteSheet:getWidth(), self.spriteSheet:getHeight()
     self.frameWidth, self.frameHeight = frameWidth, frameHeight
 
@@ -25,7 +25,7 @@ function Animation:new(spriteSheet, frameWidth, frameHeight, frameDuration, fram
     end
 
     self.frameDuration = frameDuration or 0.1 -- default to 0.1s per frame
-    self.frameCount = frameCount
+    self.frameCount = frameCount or #frameInfo or #self.frames
     self.currentFrame = 1
     self.activeFrame = self.frames[self.currentFrame]
     self.elapsedTime = 0
