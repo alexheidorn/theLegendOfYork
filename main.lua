@@ -5,13 +5,14 @@ require 'lib/sprite-functions'
 
 require 'game'
 require 'lib.input'
+require 'lib.animation'
 require 'resources.entity'
 require 'resources.player'
 -- require 'lib.map'
 
 
 
-local map, chopper
+local map
 function love.load()
     -- LoadMap('assets/maps/map.lua')
     map = LoadMap('assets/maps/map.lua')
@@ -19,14 +20,12 @@ function love.load()
     Game:load()
 end
 
-function love.update(dt)
-    updateSprite(dt)    
+function love.update(dt) 
     Game:update(dt)
 end
 
 function love.draw()
     DrawMap()
-    drawSprite()
     love.graphics.print("Hello worlf!")
 end
 
