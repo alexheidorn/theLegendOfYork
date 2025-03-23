@@ -7,6 +7,7 @@ require 'lib.input'
 require 'lib.animation'
 require 'resources.entity'
 require 'resources.player'
+require 'resources.enemy'
 -- require 'lib.map'
 
 

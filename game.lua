@@ -5,6 +5,7 @@ function Game:load()
     -- initialize game componenets
     self.player = Player(64, 64) --starting positon
     self.input = Input() -- instance of Input class
+    self.enemies = { Enemy(200, 100), Enemy(300, 150)}
 
     -- controller detection
     self.joystick = nil
@@ -19,11 +20,19 @@ end
 function Game:update(dt)
     self.input:handleInput(self.player, dt, self.joystick)
     self.player:update(dt)
+
+    for _, enemy in ipairs(self.enemies) do
+        enemy:update(dt)
+    end
 end
 
 function Game:draw()
     -- Map:draw()
     self.player:draw()
+
+    for _, enemy in ipairs(self.enemies) do
+        enemy:draw()
+    end
 end
 
 function Game:keypressed(key)
