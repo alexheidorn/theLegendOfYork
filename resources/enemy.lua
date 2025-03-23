@@ -12,13 +12,6 @@ function Enemy:update(dt)
     -- simple AI movement: move back & forth
     self:move(self.direction, 0, dt)
 
-    -- flip sprite if moving left
-    if self.direction < 0 then
-        self.spriteSheet:setFlip(true, false)
-    else
-        self.spriteSheet:setFlip(false, false)
-    end
-
     -- change direction every 2 seconds
     if math.floor(love.timer.getTime()) % 4 == 0 then
         self.direction = -self.direction
