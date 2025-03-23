@@ -1,17 +1,17 @@
 Object = require 'lib/classic'
 Entity = Object:extend()
 
-function Entity:new(x, y, spriteSheet, frameWidth, frameHeight, frameDuration, frameCount)
+function Entity:new(x, y, frameWidth, frameHeight, frameDuration, frameCount)
     self.x = x
     self.y = y
     self.speed = 60 -- Default speed in pixels per second
 
     -- animation instance
-        -- codeium auto complete options from Balatro format
+        -- codeium auto complete options from Balatro form
             -- self.sprite = Sprite(0, 0, 32, 32, G.ASSET_ATLAS['player'], {x = 0, y = 0})
             -- self.spriteSheet = love.graphics.newImage(G.ASSET_ATLAS['player'])
             -- self.spriteSheet = G.ASSET_ATLAS['player']
-    self.spriteSheet = love.graphics.newImage(spriteSheet)
+    self.spriteSheet = love.graphics.newImage("assets/spritesheets/pictureAttackChoppers_thumb.png")
     self.animation = Animation(self.spriteSheet, frameWidth, frameHeight, frameDuration, frameCount)
 end
 
@@ -30,3 +30,5 @@ end
 function Entity:draw() 
     self.animation:draw(self.x, self.y)
 end
+
+return Entity
