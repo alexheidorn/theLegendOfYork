@@ -1,5 +1,3 @@
-Entity = require 'resources/entity'
-
 Player = Entity:extend()
 -- Player = Object:extend()
 
