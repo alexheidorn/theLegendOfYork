@@ -16,9 +16,7 @@ function Player:new(x, y)
     Player.super.new(self, x, y, 32, 32)
     self.speed = 100
     self.state = 'idle'
-    -- self.sprite = Sprite(0, 0, 32, 32, G.ASSET_ATLAS['player'], {x = 0, y = 0})
-    -- self.spriteSheet = love.graphics.newImage(G.ASSET_ATLAS['player'])
-    -- self.spriteSheet = G.ASSET_ATLAS['player']
+    
     self.spriteSheet = love.graphics.newImage("assets/spritesheets/pictureAttackChoppers_thumb.png")
 
 end
