@@ -27,5 +27,5 @@ function Input:handleInput(player, dt, joystick)
     end
 
     -- apply movement
-    -- player:move(moveX, moveY, dt)
+    player:move(moveX, moveY, dt)
 end
