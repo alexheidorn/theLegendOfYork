@@ -1,9 +1,11 @@
 Object = require 'lib/classic'
 Entity = Object:extend()
 
-function Entity:new(x, y, spriteSheetPath, frameWidth, frameHeight, frameCount, frameDuration)
-    self.x = x
-    self.y = y
+function Entity:new(x, y, spriteSheetPath, width, height, frameCount, frameDuration)
+    self.x = x or 0
+    self.y = y or 0
+    self.width = width or 32
+    self.height = height or 32
     self.speed = 60 -- Default speed in pixels per second
 
     -- animation instance
@@ -12,7 +14,7 @@ function Entity:new(x, y, spriteSheetPath, frameWidth, frameHeight, frameCount, 
             -- self.spriteSheet = love.graphics.newImage(G.ASSET_ATLAS['player'])
             -- self.spriteSheet = G.ASSET_ATLAS['player']
     self.spriteSheet = love.graphics.newImage(spriteSheetPath)
-    self.animation = Animation(self.spriteSheet, frameWidth, frameHeight, frameCount, frameDuration)
+    self.animation = Animation(self.spriteSheet, self.width, self.height, frameCount, frameDuration)
 end
 
 function Entity:update(dt)
