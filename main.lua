@@ -1,7 +1,6 @@
 -- main.lua
 Object = require 'lib/classic' 
 require 'lib/map-functions'
-require 'lib/sprite-functions'
 
 require 'game'
 require 'lib.input'
