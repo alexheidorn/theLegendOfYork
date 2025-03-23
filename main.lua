@@ -15,7 +15,6 @@ local map, chopper
 function love.load()
     -- LoadMap('assets/maps/map.lua')
     map = LoadMap('assets/maps/map.lua')
-    chopper = LoadSprite('assets/sprites/chopper.lua')
 
     Game:load()
 end
