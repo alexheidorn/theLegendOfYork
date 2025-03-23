@@ -19,16 +19,16 @@ function Player:new(x, y)
         -- frame info for each animation
         idle = {
             {1, 0, 0},
-            {2, 128, 0},
-            {3, 0, 64},
-            {4, 128, 64},
+            {2, 172, 0},
+            {3, 344, 0},
+            {4, 516, 0},
         }
         -- walk
         -- attack
     }
     self.currentAnimation = self.animations.idle
 
-    Player.super.new(self, x, y, 32, 32, self.currentAnimation)
+    Player.super.new(self, x, y, self.spriteSheetPath, 172, 332)
     self.speed = 100
     self.state = 'idle'
 
