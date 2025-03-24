@@ -35,3 +35,24 @@ function Map:draw()
         end
     end
 end
+
+function Map:collides(x, y, width, height)
+    local tileX = math.floor(x / self.tileWidth) + 1
+    local tileY = math.floor(y / self.tileHeight) + 1
+    local tileWidth = math.ceil((x + width) / self.tileWidth) - tileX
+    local tileHeight = math.ceil((y + height) / self.tileHeight) - tileY
+
+    for ty = tileY, tileY + tileHeight - 1 do
+        for tx = tileX, tileX + tileWidth - 1 do
+            local tile = self.tileTable[ty] and self.tileTable[ty][tx]
+            if tile then
+                local quad = self.quads[tile]
+                if quad then
+                    return true
+                end
+            end
+        end
+    end
+
+    return false
+end
