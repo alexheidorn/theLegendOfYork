@@ -1,10 +1,11 @@
 -- main.lua
-Object = require 'lib/classic' 
-require 'lib/map-functions'
+Object = require 'lib/classic'
+Camera = require 'lib/camera' 
 
 require 'game'
 require 'lib.input'
 require 'lib.animation'
+require 'resources.map'
 require 'resources.entity'
 require 'resources.player'
 require 'resources.enemy'
@@ -14,9 +15,6 @@ require 'resources.enemy'
 
 local map
 function love.load()
-    -- LoadMap('assets/maps/map.lua')
-    map = LoadMap('assets/maps/map.lua')
-
     Game:load()
 end
 
@@ -25,7 +23,6 @@ function love.update(dt)
 end
 
 function love.draw()
-    DrawMap()
     Game:draw()
     love.graphics.print("Hello worlf!")
 end
