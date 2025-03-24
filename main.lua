@@ -9,11 +9,7 @@ require 'resources.map'
 require 'resources.entity'
 require 'resources.player'
 require 'resources.enemy'
--- require 'lib.map'
 
-
-
-local map
 function love.load()
     Game:load()
 end
