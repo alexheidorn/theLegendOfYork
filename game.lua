@@ -14,8 +14,15 @@ function Game:load()
         {'^', 64, 32},
         {'~', 128, 0},
     }
+    local solidTiles = {
+        ['*'] = true,
+        ['<'] = true,
+        ['^'] = true,
+        ['~'] = true
+    }
     local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
-    self.map = Map(32, 32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile)
+    local testMap = Map(32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile, solidTiles)
+    self.map = testMap
 
     self.player = Player(64, 64) --starting positon
     self.input = Input() -- instance of Input class
