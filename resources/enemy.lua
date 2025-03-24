@@ -1,8 +1,8 @@
 Enemy = Entity:extend()
 
 function Enemy:new(x, y)
-    self.spriteSheetPath = "assets/spritesheets/funny-pixelated-character/preview.jpg"
-    Enemy.super.new(self, x, y, self.spriteSheetPath, 172, 332, 4)
+    self.spriteSheetPath = "assets/Zelda-like/log.png"
+    Enemy.super.new(self, x, y, self.spriteSheetPath, 32, 32, 4)
 
     self.state = "patrolling"
     self.direction = 1 -- 1 = right, -1 = left
@@ -13,7 +13,7 @@ function Enemy:update(dt)
     self:move(self.direction, 0, dt)
 
     -- change direction every 2 seconds
-    if math.floor(love.timer.getTime()) % 4 == 0 then
+    if math.floor(love.timer.getTime()) % 2 == 0 then
         self.direction = -self.direction
     end
 

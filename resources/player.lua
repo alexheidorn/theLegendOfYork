@@ -11,8 +11,8 @@ Player = Entity:extend()
 -- end
 
 function Player:new(x, y)
-    self.spriteSheetPath = "assets/spritesheets/funny-pixelated-character/preview.jpg"
-    Player.super.new(self, x, y, self.spriteSheetPath, 172, 332, 4)
+    self.spriteSheetPath = "assets/Zelda-like/character.png"
+    Player.super.new(self, x, y, self.spriteSheetPath, 16, 32, 4)
     self.speed = 100
     self.state = 'idle'
     
