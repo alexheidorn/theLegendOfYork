@@ -3,6 +3,19 @@ Game = Object:extend()
 
 function Game:load()
     -- initialize game componenets
+    cam = Camera()
+
+    --Map creation logic
+    -- lab tileset
+    local labQuadInfo = {
+        {' ', 0, 0},
+        {'*', 0, 32},
+        {'<', 32, 32},
+        {'^', 64, 32},
+        {'~', 128, 0},
+    }
+    local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
+    self.map = Map(32, 32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile)
     self.player = Player(64, 64) --starting positon
     self.input = Input() -- instance of Input class
     self.enemies = { Enemy(200, 100), Enemy(300, 150)}
@@ -24,15 +37,19 @@ function Game:update(dt)
     for _, enemy in ipairs(self.enemies) do
         enemy:update(dt)
     end
+    
+    cam:lookAt(self.player.x, self.player.y)
 end
 
 function Game:draw()
-    -- Map:draw()
-    self.player:draw()
+    cam:attach()
+        self.map:draw()
+        self.player:draw()
 
-    for _, enemy in ipairs(self.enemies) do
-        enemy:draw()
-    end
+        for _, enemy in ipairs(self.enemies) do
+            enemy:draw()
+        end
+    cam:detach()
 end
 
 function Game:keypressed(key)
