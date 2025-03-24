@@ -25,11 +25,14 @@ function Entity:move(moveX, moveY, dt)
     local moveAmount = self.speed * dt
     local newX = self.x + moveX * moveAmount
     local newY = self.y + moveY * moveAmount
-    self.x = newX
-    self.y = newY
+    -- check for collisions
+    if not G.map:collides(newX, newY, self.width, self.height) then
+        self.x = newX
+        self.y = newY
+    end
 end
 
-function Entity:draw() 
+function Entity:draw()
     self.animation:draw(self.x, self.y)
 end
 
