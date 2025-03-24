@@ -20,7 +20,6 @@ end
 
 function love.draw()
     Game:draw()
-    love.graphics.print("Hello worlf!")
 end
 
 function love.quit()
