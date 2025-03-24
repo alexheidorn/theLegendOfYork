@@ -3,7 +3,7 @@ Game = Object:extend()
 
 function Game:load()
     -- initialize game componenets
-    cam = Camera()
+    Cam = Camera()
 
     --Map creation logic
     -- lab tileset
@@ -16,6 +16,7 @@ function Game:load()
     }
     local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
     self.map = Map(32, 32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile)
+
     self.player = Player(64, 64) --starting positon
     self.input = Input() -- instance of Input class
     self.enemies = { Enemy(200, 100), Enemy(300, 150)}
@@ -38,18 +39,33 @@ function Game:update(dt)
         enemy:update(dt)
     end
     
-    cam:lookAt(self.player.x, self.player.y)
+    local screenWidth = love.graphics.getWidth()
+    local screenHeight = love.graphics.getHeight()
+    local playerCenterX = self.player.x + self.player.width / 2
+    local playerCenterY = self.player.y + self.player.height / 2
+    Cam:lookAt(playerCenterX, playerCenterY)
+    if Cam.x < screenWidth / 2 then
+        Cam.x = screenWidth / 2
+    end
+    if Cam.y < screenHeight / 2 then
+        Cam.y = screenHeight / 2
+    end
 end
 
 function Game:draw()
-    cam:attach()
+    --HUD
+    love.graphics.print("Hello worlf!")
+
+    --camera view
+    Cam:attach()
         self.map:draw()
         self.player:draw()
 
         for _, enemy in ipairs(self.enemies) do
             enemy:draw()
         end
-    cam:detach()
+    Cam:detach()
+    
 end
 
 function Game:keypressed(key)
@@ -99,3 +115,5 @@ function TitleScreenOptions()
     love.graphics.print("4) Exit :(", 100, 400)
 
 end
+
+G = Game()
