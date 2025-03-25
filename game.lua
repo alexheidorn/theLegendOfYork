@@ -46,16 +46,29 @@ function Game:update(dt)
         enemy:update(dt)
     end
     
+    -- camera logic
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
     local playerCenterX = self.player.x + self.player.width / 2
     local playerCenterY = self.player.y + self.player.height / 2
     Cam:lookAt(playerCenterX, playerCenterY)
+    
+    -- Camera boundaries
+    -- Left Boundary
     if Cam.x < screenWidth / 2 then
         Cam.x = screenWidth / 2
     end
+    -- Top Boundary
     if Cam.y < screenHeight / 2 then
         Cam.y = screenHeight / 2
+    end
+    -- Right Boundary
+    if Cam.x > self.map.width * self.map.tileSize - screenWidth / 2 then
+        Cam.x = self.map.width * self.map.tileSize - screenWidth / 2
+    end
+    -- Bottom Boundary
+    if Cam.y > self.map.height * self.map.tileSize - screenHeight / 2 then
+        Cam.y = self.map.height * self.map.tileSize - screenHeight / 2
     end
 end
 

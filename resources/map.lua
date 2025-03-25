@@ -3,6 +3,8 @@ Map = Object:extend()
 function Map:new(tileSize,  tileSetPath, quadData, mapData, solidTiles)
     self.tileset = love.graphics.newImage(tileSetPath)
     self.tilesetWidth, self.tilesetHeight = self.tileset:getWidth(), self.tileset:getHeight()
+    self.width = 0
+    self.height = 0
     self.tileSize = tileSize
     self.solidTiles = solidTiles
     
@@ -19,8 +21,13 @@ function Map:new(tileSize,  tileSetPath, quadData, mapData, solidTiles)
         for char in line:gmatch(".") do
             row[#row + 1] = char
         end
+        if #line - 1 > self.width then
+            self.width = #line - 1
+        end
         table.insert(self.tileTable, row)
     end
+
+    self.height = #self.tileTable
 end
 
 function Map:update()
