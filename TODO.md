@@ -4,6 +4,7 @@
     - [ ] zoom camera
     - [x] camera stops moving when out of bounds
     - [ ] remove camera functions from G:update()
+    - [ ] fix tiles jittering when camera moves
 
 - [ ] fix enemy movement
     - [ ] fix enemies move back & forth
@@ -18,3 +19,5 @@
 - [ ] Put map creation in a separate file
 - [ ] implement asset atlas
 - [ ] update player animations for all directions
+
+- [x] fix map drawing extra tile at the end of each row
