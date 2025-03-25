@@ -12,8 +12,10 @@
     - [ ] add enemy pathfinding on tileset
 
 - [x] Add collision
-    - [ ] fix collision - define solid tiles in map or tileset
+    - [x] fix collision - define solid tiles in map or tileset
     - [ ] add enemy collision with player
+    - [ ] fix collision with height/width of entity
+        - [ ] create hitbox with rounded corners?
 
 - [ ] change map tileset to Zelda-like
 - [ ] Put map creation in a separate file
