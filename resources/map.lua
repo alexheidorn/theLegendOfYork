@@ -29,7 +29,7 @@ end
 
 function Map:draw()
     for row = 1, #self.tileTable do
-        for col = 1, #self.tileTable[row] do
+        for col = 1, #self.tileTable[row] - 1 do
             local char = self.tileTable[row][col]
             local quad = self.quads[char] or self.quads[' ']
             if quad then
