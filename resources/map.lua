@@ -7,6 +7,8 @@ function Map:new(tileSize,  tileSetPath, quadData, mapData, solidTiles)
     self.height = 0
     self.tileSize = tileSize
     self.solidTiles = solidTiles
+
+    self.showCollisionBoxes = true
     
 
     self.quads = {}
@@ -42,13 +44,34 @@ function Map:draw()
             if quad then
                 love.graphics.draw(self.tileset, quad, (col - 1) * self.tileSize, (row - 1) * self.tileSize)
             end
+
+            if self.showCollisionBoxes and self.solidTiles[char] then
+                love.graphics.setColor(255, 0, 0, 128) -- Red with 50% transparency
+                love.graphics.rectangle(
+                    "line", 
+                    (col - 1) * self.tileSize,
+                    (row - 1) * self.tileSize,
+                    self.tileSize,
+                    self.tileSize
+                    -- 8, 8 -- Rounded corners with radius 8 
+                ) 
+                love.graphics.setColor(255, 255, 255, 255) -- Reset color
+            end
         end
     end
 end
 
-function Map:collides(x, y)
+function Map:collides(x, y, width, height)
+    return self:_collides(x, y) or self:_collides(x + width, y) or self:_collides(x, y + height) or self:_collides(x + width, y + height)
+end
+
+
+
+function Map:_collides(x, y)
+    -- check for collisions with solid tiles
     local col = math.floor(x / self.tileSize) + 1
     local row = math.floor(y / self.tileSize) + 1
+
 
     if col < 1 or col > #self.tileTable[row] or row < 1 or row > #self.tileTable then
         return true
