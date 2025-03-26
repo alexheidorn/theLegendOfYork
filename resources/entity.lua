@@ -10,6 +10,8 @@ function Entity:new(x, y, spriteSheetPath, width, height, frameCount, frameDurat
 
     self.showHitbox = false
     self.hitbox = {x = 0, y = 0, width = self.width, height = self.height}
+    self.hitbox.offsetX = 0
+    self.hitbox.offsetY = 0
     -- animation instance
         -- codeium auto complete options from Balatro form
             -- self.sprite = Sprite(0, 0, 32, 32, G.ASSET_ATLAS['player'], {x = 0, y = 0})
@@ -25,16 +27,21 @@ end
 
 function Entity:move(moveX, moveY, dt)
     local moveAmount = self.speed * dt
+
+    -- Check X movement
     local newX = self.x + moveX * moveAmount
-    local newY = self.y + moveY * moveAmount
-    -- check for collisions
-    if not G.map:collides(newX, newY, self.width, self.height) then
+    if not G.map:collides(newX, self.y, self.width, self.height) then
         self.x = newX
-        self.y = newY
-        -- update hitbox position
         self.hitbox.x = self.x + self.hitbox.offsetX
+    end
+
+    -- Check Y movement
+    local newY = self.y + moveY * moveAmount
+    if not G.map:collides(self.x, newY, self.width, self.height) then
+        self.y = newY
         self.hitbox.y = self.y + self.hitbox.offsetY
     end
+end
 end
 
 function Entity:draw()
@@ -49,7 +56,8 @@ function Entity:draw()
         self.hitbox.y,
         self.hitbox.width,
         self.hitbox.height, 
-        8, 8) -- Rounded corners with radius 8
+        8, 8 -- Rounded corners with radius 8
+    ) 
     love.graphics.setColor(255, 255, 255, 255) -- Reset color
 end
 
