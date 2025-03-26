@@ -6,6 +6,7 @@ function Enemy:new(x, y)
 
     self.state = "patrolling"
     self.direction = 1 -- 1 = right, -1 = left
+    self.timer = 0
 end
 
 function Enemy:update(dt)
@@ -13,7 +14,16 @@ function Enemy:update(dt)
     self:move(self.direction, 0, dt)
 
     -- change direction every 2 seconds
-    if math.floor(love.timer.getTime()) % 2 == 0 then
+    if self.state == "patrolling" then
+        self.timer = self.timer + dt
+        if self.timer > 2 then
+            self.direction = -self.direction
+            self.timer = 0
+        end
+    end
+
+    -- change direction when colliding with a wall
+    if G.map:collides(self.x, self.y, self.width, self.height) then
         self.direction = -self.direction
     end
 
