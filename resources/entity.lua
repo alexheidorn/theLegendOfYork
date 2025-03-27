@@ -17,8 +17,8 @@ function Entity:new(x, y, spriteSheetPath, width, height, animations)
     self.sprite = {}
     self.sprite.width = animations[self.state]['pixelWidth'] or 16
     self.sprite.height = animations[self.state]['pixelHeight'] or 16
-    self.sprite.offsetTop = (self.sprite.height - self.hitbox.x) or 0
-    self.sprite.offsetLeft = (self.sprite.width - self.hitbox.y) or 0
+    self.sprite.offsetTop = (self.sprite.height / 2 - self.hitbox.height / 2) or 0
+    self.sprite.offsetLeft = (self.sprite.width / 2 - self.hitbox.width / 2) or 0
     -- self.sprite.offsetWidth = (self.sprite.width / 2 - self.hitbox.width / 2) or 0
     -- self.sprite.offsetHeight = (self.sprite.height / 2 - self.hitbox.height / 2) or 0
     
@@ -75,7 +75,7 @@ function Entity:draw()
     end
 
     -- draw the entity's sprite on top
-    self.animation:draw(self.hitbox.x, self.hitbox.y) 
+    self.animation:draw(self.hitbox.x - self.sprite.offsetLeft, self.hitbox.y - self.sprite.offsetTop) 
 
     end
 
