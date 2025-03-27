@@ -1,23 +1,61 @@
 -- Class
 Input = Object:extend()
 
-function Input:handleInput(player, dt, joystick)
+function Input:new()
+    self.keybinds = {
+        left = {"a", "left", "dpleft", "leftx-",},
+        right = {"d", "right", "dpright", "leftx+",},
+        up = {"w", "up", "dpup", "lefty-",},
+        down = {"s", "down", "dpdown", "lefty+",},
+        
+        start = {"return", "button_start",},
+        select = {"space", "button_select",},
+        pause = {"escape",},
+        confirm = {"return", "z", "button_a",},
+        cancel = {"escape", "x", "button_b",},
+        attack = {"space", "x", "button_y",},
+        inventory = {"e", "button_x",},
+        map = {"m", "button_start",},
+    }
+end
+
+function Input:handleInput(dt, joystick)
     local moveX, moveY = 0, 0
 
-    -- gamepad input
-    if joystick then
-        local joyX = joystick:getGamepadAxis("leftx")
-        local joyY = joystick:getGamepadAxis("lefty")
+    local function _pressed(action)
+        for _, input in ipairs(self.keybinds[action] or {}) do
+            -- check keyboard input
+            if love.keyboard.isDown(input) then
+                return true
+            end
 
-        if math.abs(joyX) > 0.2 then moveX = joyX end
-        if math.abs(joyY) > 0.2 then moveY = joyY end
+            -- check controller input
+            if joystick and joystick:isGamepadDown(input) then
+                return true
+            end
+
+            -- check gamepad axis input
+            if input == "leftx-" and joystick and joystick:getGamepadAxis("leftx") < -0.2 then
+                return true
+            end
+            if input == "leftx+" and joystick and joystick:getGamepadAxis("leftx") > 0.2 then
+                return true
+            end
+            if input == "lefty-" and joystick and joystick:getGamepadAxis("lefty") < -0.2 then
+                return true
+            end
+            if input == "lefty+" and joystick and joystick:getGamepadAxis("lefty") > 0.2 then
+                return true
+            end            
+        end
+        return false
     end
 
-    -- keyboard input
-    if love.keyboard.isDown("a") or love.keyboard.isDown("left") then moveX = moveX - 1 end
-    if love.keyboard.isDown("d") or love.keyboard.isDown("right") then moveX = moveX + 1 end
-    if love.keyboard.isDown("w") or love.keyboard.isDown("up") then moveY = moveY - 1 end
-    if love.keyboard.isDown("s") or love.keyboard.isDown("down") then moveY = moveY + 1 end
+    -- check for movement input
+    if _pressed("left") then moveX = moveX - 1 end
+    if _pressed("right") then moveX = moveX + 1 end
+    if _pressed("up") then moveY = moveY - 1 end
+    if _pressed("down") then moveY = moveY + 1 end
     
 
     -- normalize diagonal movement
@@ -27,5 +65,5 @@ function Input:handleInput(player, dt, joystick)
     end
 
     -- apply movement
-    player:move(moveX, moveY, dt)
+    G.PLAYER:move(moveX, moveY, dt)
 end
