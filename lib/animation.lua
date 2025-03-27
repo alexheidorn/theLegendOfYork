@@ -53,4 +53,19 @@ function Animation:draw(x, y)
     love.graphics.draw(self.spriteSheet, self.activeFrame, x, y)
 end
 
+function Animation:play()
+    self.playing = true
+end
+
+function Animation:stop()
+    self.playing = false
+end
+
+function Animation:reset()
+    self.currentFrame = 1
+    self.activeFrame = self.frames[self.currentFrame]
+    self.elapsedTime = 0
+    self.playing = true
+end
+
 return Animation
