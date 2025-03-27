@@ -22,7 +22,22 @@ G.animation_atli = {
 }
 -- tilesets
 G.asset_atlas = {
-    {name = "lab", path = "assets/tilesets/Untitled.png", pwidth = 32, pheight = 32},
+    lab = {name = "lab", path = "assets/tilesets/Untitled.png", tileSize = 32, 
+        quadData = {
+            {' ', 0, 0},
+            {'*', 0, 32},
+            {'<', 32, 32},
+            {'^', 64, 32},
+            {'~', 128, 0},
+        },
+        solidTiles = {
+            ['*'] = true,
+            ['<'] = true,
+            ['^'] = true,
+            ['~'] = true
+        },
+        data = love.filesystem.read('assets/maps/map.txt')
+    },
     {name = "overworld", path = "assets/Zelda-like/Overworld.png", pwidth = 32, pheight = 32},
     {name = "inside", path = "assets/Zelda-like/Inner.png", pwidth = 16, pheight = 16},
 }

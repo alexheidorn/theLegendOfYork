@@ -10,23 +10,7 @@ end
 function Game:load()
     -- initialize game componenets
 
-    --Map creation logic
-    -- lab tileset
-    local labQuadInfo = {
-        {' ', 0, 0},
-        {'*', 0, 32},
-        {'<', 32, 32},
-        {'^', 64, 32},
-        {'~', 128, 0},
-    }
-    local solidTiles = {
-        ['*'] = true,
-        ['<'] = true,
-        ['^'] = true,
-        ['~'] = true
-    }
-    local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
-    local testMap = Map(32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile, solidTiles)
+    local testMap = Map("lab")
     self.map = testMap
 
     self.player = Player(64, 64) --starting positon
