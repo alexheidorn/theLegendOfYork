@@ -1,12 +1,7 @@
 Enemy = Entity:extend()
 
-function Enemy:new(x, y)
-    self.spriteSheetPath = "assets/Zelda-like/log.png"
-    self.animations = {
-        idle = { row = 1, frameCount = 4, loop = true, frameDuration = 0.5 },
-        patrolling = { row = 1, frameCount = 4, loop = true },
-    }
-    Enemy.super.new(self, x, y, self.spriteSheetPath, 32, 32, self.animations)
+function Enemy:new(x, y, name)
+    Enemy.super.new(self, x, y, name)
 
     self.state = "patrolling"
     

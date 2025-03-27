@@ -31,7 +31,7 @@ function Game:load()
 
     self.player = Player(64, 64) --starting positon
     self.input = Input() -- instance of Input class
-    self.enemies = { Enemy(200, 100), Enemy(300, 200)}
+    self.enemies = { Enemy(200, 100, "log"), Enemy(300, 200, "log") }
 
     -- controller detection
     self.joystick = nil

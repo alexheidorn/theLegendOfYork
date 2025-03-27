@@ -1,16 +1,18 @@
 Object = require 'lib/classic'
 Entity = Object:extend()
 
-function Entity:new(x, y, spriteSheetPath, width, height, animations)
+function Entity:new(x, y, name)
+    self.entity = G.animation_atli[name]
+    self.spriteSheet = love.graphics.newImage(self.entity.path)
+    self.animations = self.entity.animations
     self.x = x or 0
     self.y = y or 0
-    self.width = width or 32
-    self.height = height or 32
+    self.width = self.entity.pixelWidth or 32
+    self.height = self.entity.pixelHeight or 32
     self.speed = 60 -- Default speed in pixels per second
-    self.animations = animations
+
     self.state = 'idle'
     
-
     self.showHitbox = false
     self.hitbox = {x = 0, y = 0, width = self.width, height = self.height}
     -- animation instance
@@ -18,7 +20,6 @@ function Entity:new(x, y, spriteSheetPath, width, height, animations)
             -- self.sprite = Sprite(0, 0, 32, 32, G.ASSET_ATLAS['player'], {x = 0, y = 0})
             -- self.spriteSheet = love.graphics.newImage(G.ASSET_ATLAS['player'])
             -- self.spriteSheet = G.ASSET_ATLAS['player']
-    self.spriteSheet = love.graphics.newImage(spriteSheetPath)
     self.animation = Animation(self.spriteSheet, self.width, self.height, self.animations[self.state])
 end
 
