@@ -28,10 +28,9 @@ function Player:new(x, y)
     self.speed = 100
 
     self.hitbox.offsetTop = 16
-
-    
-    
 end
+
+
 
 function Player:move(moveX, moveY, dt)
     -- local moveAmount = self.speed * dt
@@ -49,15 +48,14 @@ function Player:move(moveX, moveY, dt)
     -- self.x = newX
     -- self.y = newY
     if moveX ~= 0 or moveY ~= 0 then
-        self.state = 'walk'
+        -- self.state = 'walk'
+        if moveY > 0 then self.state = 'down'
+        elseif moveY < 0 then self.state = 'up'
+        elseif moveX > 0 then self.state = 'right'
+        elseif moveX < 0 then self.state = 'left' end
     else
         self.state = 'idle'
     end
-
-    if moveX > 0 then self.state = 'right' end
-    if moveX < 0 then self.state = 'left' end
-    if moveY > 0 then self.state = 'down' end
-    if moveY < 0 then self.state = 'up' end
 
     Player.super.move(self, moveX, moveY, dt)
 end
