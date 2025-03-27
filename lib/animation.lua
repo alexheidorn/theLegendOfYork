@@ -35,7 +35,7 @@ function Animation:setFrames(animationInfo)
     self.frames = {}
     for i = 1, self.frameCount do
         local x = (i - 1) * self.frameWidth
-        local y = (animationInfo['row'] - 1) * self.frameHeight 
+        local y = (animationInfo['row'] - 1) * self.frameHeight
         local quad = love.graphics.newQuad(x, y, self.frameWidth, self.frameHeight, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
         table.insert(self.frames, quad)
     end
@@ -66,7 +66,7 @@ function Animation:play()
     self.playing = true
 end
 
-function Animation:stop()
+function Animation:pause()
     self.playing = false
 end
 
