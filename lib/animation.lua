@@ -7,21 +7,11 @@ function Animation:new(spriteSheet, frameWidth, frameHeight, animationInfo)
     self.spriteSheet = spriteSheet
     self.spritesheetWidth, self.spritesheetHeight = self.spriteSheet:getWidth(), self.spriteSheet:getHeight()
     self.frameWidth, self.frameHeight = frameWidth, frameHeight
-    self.frameCount = animationInfo['frameCount'] or 1
-    self.frameDuration = animationInfo['frameDuration'] or 0.1
-    self.loop = animationInfo['loop'] or true
     self.playing = true
     self.elapsedTime = 0
     
-
     -- Generate the frames (newQuads) based on spriteSheet dimensions and frame size
-    self.frames = {}
-    for i = 1, self.frameCount do
-        local x = (i - 1) * self.frameWidth
-        local y = 0
-        local quad = love.graphics.newQuad(x, y, self.frameWidth, self.frameHeight, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
-        table.insert(self.frames, quad)
-    end
+    self:setFrames(animationInfo)
 
     self.currentFrame = 1
     self.activeFrame = self.frames[self.currentFrame]
@@ -34,6 +24,24 @@ function Animation:new(spriteSheet, frameWidth, frameHeight, animationInfo)
     -- end
 
     -- self.state = animationInfo['state'] or ''
+end
+
+function Animation:setFrames(animationInfo)
+    self.frameCount = animationInfo['frameCount'] or 1
+    self.frameDuration = animationInfo['frameDuration'] or 0.1
+    self.loop = animationInfo['loop'] or true
+
+    -- Regenerate the frames
+    self.frames = {}
+    for i = 1, self.frameCount do
+        local x = (i - 1) * self.frameWidth
+        local y = (animationInfo['row'] - 1) * self.frameHeight 
+        local quad = love.graphics.newQuad(x, y, self.frameWidth, self.frameHeight, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
+        table.insert(self.frames, quad)
+    end
+
+    -- Reset the animation
+    self:reset()
 end
 
 function Animation:update(dt)
