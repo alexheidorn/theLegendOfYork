@@ -1,14 +1,15 @@
 ## TODO
 
 - [x] Add camera
-    - [ ] zoom camera
-    - [x] camera stops moving when out of bounds
+    - [x] zoom camera
+        - [ ] now make it less grainy??
+    - [ ] camera stops moving when out of bounds
     - [ ] remove camera functions from G:update()
-    - [ ] fix tiles jittering when camera moves
+    - [?] fix tiles jittering when camera moves
 
 - [ ] fix enemy movement
     - [x] fix enemies move back & forth
-        - [ ] fix enemy switch direction when hit a wall
+        - [x] fix enemy switch direction when hit a wall
     - [ ] add more types of enemy movement
     - [ ] add enemy pathfinding on tileset
 
@@ -19,10 +20,43 @@
         - [ ] create hitbox with rounded corners?
 
 - [ ] change map tileset to Zelda-like
-- [ ] Put map creation in a separate file
-- [ ] implement asset atlas
+- [x] Put map creation in a separate file
+
+- [x] implement asset atlas
+    - [ ] clean asset atlas?? idk, it doesn't look nice rn lol
+
+
 - [x] update player animations for all directions
     - [ ] fix swap to idle animation when not moving
     - [ ] finishing playing walk cycle before switching to idle 
 
 - [x] fix map drawing extra tile at the end of each row
+
+- [x] create keybinds for input
+    - [ ] remove player movement from input handling function
+        - [ ] just return the action that is pressed?    
+
+- [ ] UI
+    - [ ] create pause menu
+        - [ ] & settings
+        - [ ] add save/load game option
+    - [ ] create game over screen
+    - [ ] create title screen
+
+- [ ] create map editor
+
+- [ ] create inventory
+    - [ ] create item system
+
+- [ ] game state system
+    - [ ] create game state machine
+        - [ ] in battle
+        - [ ] in menu
+        - [ ] on title screen
+        - [ ] 
+    - [ ] create dialogue system
+        - [ ] in dialogue
+
+- [ ] create battle system
+    - [ ] Chronotrigger/Sea of Stars-like battle system with turn based battles IN overworld (no screne transitions)
+        - [ ] draw battle UI on top of map
