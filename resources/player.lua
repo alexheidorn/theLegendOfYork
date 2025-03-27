@@ -17,9 +17,9 @@ function Player:new(x, y)
         -- row, frame count
         idle = { row = 1, frameCount = 4, loop = true, frameDuration = 0.5 },
         down = { row = 1, frameCount = 4, loop = true },
-        right = { row = 1, frameCount = 4, loop = true },
+        right = { row = 2, frameCount = 4, loop = true },
         up = { row = 3, frameCount = 4, loop = true },
-        left = { row = 3, frameCount = 4, loop = true},
+        left = { row = 4, frameCount = 4, loop = true},
 
         -- walk
         -- attack
@@ -49,15 +49,27 @@ function Player:move(moveX, moveY, dt)
     -- self.y = newY
     if moveX ~= 0 or moveY ~= 0 then
         -- self.state = 'walk'
-        if moveY > 0 then self.state = 'down'
-        elseif moveY < 0 then self.state = 'up'
-        elseif moveX > 0 then self.state = 'right'
-        elseif moveX < 0 then self.state = 'left' end
+        self.animation:play()
+        if moveY > 0 then self:setState('down')
+        elseif moveY < 0 then self:setState('up')
+        elseif moveX > 0 then self:setState('right')
+        elseif moveX < 0 then self:setState('left') end
     else
-        self.state = 'idle'
+        self.animation:pause()
+        local elapsedTime = 0 + dt
+        if elapsedTime > 0.5 then
+            self.animation:play()
+            self:setState('idle')
+            elapsedTime = 0
+        end
     end
 
     Player.super.move(self, moveX, moveY, dt)
+end
+
+function Player:update(dt)
+    -- Player.super.update(self, dt)
+    self.animation:update(dt)
 end
 
 function Player:attack(target)
