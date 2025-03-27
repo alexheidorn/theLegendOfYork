@@ -3,7 +3,7 @@
 
 Animation = Object:extend()
 
-function Animation:new(spriteSheet, frameWidth, frameHeight, frameCount, frameDuration)
+function Animation:new(spriteSheet, frameWidth, frameHeight, frameCount, frameDuration, animationInfo)
     self.spriteSheet = spriteSheet
     self.spritesheetWidth, self.spritesheetHeight = self.spriteSheet:getWidth(), self.spriteSheet:getHeight()
     self.frameWidth, self.frameHeight = frameWidth, frameHeight
@@ -29,10 +29,14 @@ function Animation:new(spriteSheet, frameWidth, frameHeight, frameCount, frameDu
     self.currentFrame = 1
     self.activeFrame = self.frames[self.currentFrame]
     self.elapsedTime = 0
-    self.loop = true
+    self.loop = animationInfo['loop'] or true
+    self.playing = true
+
+    -- self.state = animationInfo['state'] or ''
 end
 
 function Animation:update(dt)
+    if not self.playing then return end
     self.elapsedTime = self.elapsedTime + dt
     if self.elapsedTime > self.frameDuration then
         self.currentFrame = self.currentFrame + 1
