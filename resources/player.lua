@@ -11,22 +11,26 @@ Player = Entity:extend()
 -- end
 
 function Player:new(x, y)
-    self.spriteSheetPath = "assets/Zelda-like/character.png"
-    Player.super.new(self, x, y, self.spriteSheetPath, 16, 32, 4)
-    self.speed = 100
-    self.state = 'idle'
-    
+    self.sprite = "assets/Zelda-like/character.png"
     self.animations = {
         -- frame info for each animation
-        idle = {
-            {1, 0, 0},
-            {2, 172, 0},
-            {3, 344, 0},
-            {4, 516, 0},
-        }
+        -- row, frame count
+        idle = { row = 1, frameCount = 4, loop = true, frameDuration = 0.5 },
+        down = { row = 1, frameCount = 4, loop = true },
+        right = { row = 1, frameCount = 4, loop = true },
+        up = { row = 3, frameCount = 4, loop = true },
+        left = { row = 3, frameCount = 4, loop = true},
+
         -- walk
         -- attack
     }
+    Player.super.new(self, x, y, self.sprite, 16, 32, self.animations)
+    self.speed = 100
+
+    self.hitbox.offsetTop = 16
+
+    
+    
 end
 
 function Player:move(moveX, moveY, dt)
@@ -44,6 +48,17 @@ function Player:move(moveX, moveY, dt)
 
     -- self.x = newX
     -- self.y = newY
+    if moveX ~= 0 or moveY ~= 0 then
+        self.state = 'walk'
+    else
+        self.state = 'idle'
+    end
+
+    if moveX > 0 then self.state = 'right' end
+    if moveX < 0 then self.state = 'left' end
+    if moveY > 0 then self.state = 'down' end
+    if moveY < 0 then self.state = 'up' end
+
     Player.super.move(self, moveX, moveY, dt)
 end
 
