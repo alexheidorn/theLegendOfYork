@@ -56,11 +56,10 @@ function Player:move(moveX, moveY, dt)
         elseif moveX < 0 then self:setState('left') end
     else
         self.animation:pause()
-        local elapsedTime = 0 + dt
-        if elapsedTime > 0.5 then
+        self.animation.elapsedTime = self.animation.elapsedTime + dt
+        if self.animation.elapsedTime > 0.5 then
             self.animation:play()
             self:setState('idle')
-            elapsedTime = 0
         end
     end
 
