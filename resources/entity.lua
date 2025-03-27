@@ -8,7 +8,7 @@ function Entity:new(x, y, spriteSheetPath, width, height, animations)
     self.height = height or 32
     self.speed = 60 -- Default speed in pixels per second
     self.animations = animations
-    self.state = ''
+    self.state = 'idle'
     
 
     self.showHitbox = false
@@ -22,7 +22,16 @@ function Entity:new(x, y, spriteSheetPath, width, height, animations)
     self.animation = Animation(self.spriteSheet, self.width, self.height, self.animations[self.state])
 end
 
+function Entity:setState(newState)
+    if self.state ~= newState and self.animations[newState] then
+        self.state = newState
+        self.currentAnimation = self.animations[newState]
+        
+    end
+end
+
 function Entity:update(dt)
+    self.animation:setFrames(self.animations[self.state]) -- update the animation frames
     self.animation:update(dt)
 end
 
