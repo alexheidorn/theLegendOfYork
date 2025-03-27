@@ -39,14 +39,14 @@ function Entity:move(moveX, moveY, dt)
 
     -- Check X movement
     local newX = self.x + moveX * moveAmount
-    if not G.map:collides(newX, self.y, self.width, self.height) then
+    if not G.MAP:collides(newX, self.y, self.width, self.height) then
         self.hitbox.x = newX
         self.x = self.hitbox.x
     end
 
     -- Check Y movement
     local newY = self.y + moveY * moveAmount
-    if not G.map:collides(self.x, newY, self.width, self.height) then
+    if not G.MAP:collides(self.x, newY, self.width, self.height) then
         self.hitbox.y = newY
         self.y = self.hitbox.y
     end

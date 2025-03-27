@@ -11,7 +11,7 @@ end
 
 function Enemy:update(dt)
     local nextX = self.x + self.direction * self.speed * dt
-    if G.map:collides(nextX, self.y, self.width, self.height) then
+    if G.MAP:collides(nextX, self.y, self.width, self.height) then
         -- change direction when colliding with a wall
         self.direction = -self.direction
         self.timer = 0
