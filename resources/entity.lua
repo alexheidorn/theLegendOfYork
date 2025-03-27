@@ -25,13 +25,11 @@ end
 function Entity:setState(newState)
     if self.state ~= newState and self.animations[newState] then
         self.state = newState
-        self.currentAnimation = self.animations[newState]
-        
+        self.animation:setFrames(self.animations[self.state]) -- update the animation frames
     end
 end
 
 function Entity:update(dt)
-    self.animation:setFrames(self.animations[self.state]) -- update the animation frames
     self.animation:update(dt)
 end
 
