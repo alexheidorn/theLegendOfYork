@@ -13,10 +13,11 @@ function Game:setGlobals()
     self.DRAW_HASH = {}
 
     self.GAME_STATE = {
-        start = 0,
-        menu = 2,
-        GAMEPLAY = 1,
-        PAUSE = 3,
+        main_menu = 0,
+        gameplay = 1,
+        pause = 2,
+        inventory = 3,
+        map = 4,
     }
 
 end
