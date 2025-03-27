@@ -10,18 +10,6 @@ end
 function Game:load()
     -- initialize game componenets
 
-    -- spritesheets
-    self.animation_atli = {
-        {name = "player", path = "assets/Zelda-like/character.png", pwidth = 32, pheight = 32, frames = 4, duration = 0.5},
-        {name = "log", path = "assets/Zelda-like/log.png", pwidth = 32, pheight = 32, frames = 4, duration = 0.5},
-    }
-    -- tilesets
-    self.asset_atlas = {
-        {name = "lab", path = "assets/tilesets/Untitled.png", pwidth = 32, pheight = 32},
-        {name = "overworld", path = "assets/Zelda-like/Overworld.png", pwidth = 32, pheight = 32},
-        {name = "inside", path = "assets/Zelda-like/Inner.png", pwidth = 16, pheight = 16},
-    }
-
     --Map creation logic
     -- lab tileset
     local labQuadInfo = {
@@ -43,7 +31,7 @@ function Game:load()
 
     self.player = Player(64, 64) --starting positon
     self.input = Input() -- instance of Input class
-    self.enemies = { Enemy(200, 100), Enemy(300, 150)}
+    self.enemies = { Enemy(200, 100), Enemy(300, 200)}
 
     -- controller detection
     self.joystick = nil
