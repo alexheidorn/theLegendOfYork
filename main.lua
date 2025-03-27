@@ -3,12 +3,13 @@ Object = require 'lib/classic'
 Camera = require 'lib/camera' 
 
 require 'game'
-require 'lib.input'
-require 'lib.animation'
-require 'resources.map'
-require 'resources.entity'
-require 'resources.player'
-require 'resources.enemy'
+require 'globals'
+require 'lib/input'
+require 'lib/animation'
+require 'resources/map'
+require 'resources/entity'
+require 'resources/player'
+require 'resources/enemy'
 
 function love.load()
     Game:load()
