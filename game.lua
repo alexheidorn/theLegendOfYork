@@ -77,9 +77,6 @@ function setScale(input)
 end
 
 function Game:draw()
-    --HUD
-    love.graphics.print("Hello worlf!")
-
     --camera view
     Cam:attach()
         self.MAP:draw()
@@ -89,7 +86,9 @@ function Game:draw()
             enemy:draw()
         end
     Cam:detach()
-    
+    --HUD
+    love.graphics.print("Hello worlf!")
+        
 end
 
 function Game:keypressed(key)
