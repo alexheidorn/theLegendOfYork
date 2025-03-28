@@ -1,6 +1,7 @@
 -- spritesheets
 G.animation_atli = {
-    player = {name = "player", path = "assets/Zelda-like/character.png", pixelWidth = 16, pixelHeight = 32,
+    player = {name = "player", hitboxWidth = 12, hitboxHeight = 21,
+        path = "assets/Zelda-like/character.png", spriteWidth = 16, spriteHeight = 32,
         animations = {
             -- animation frame info for each state
             idle = { row = 1, frameCount = 4, loop = true, frameDuration = 0.5 },
@@ -13,7 +14,8 @@ G.animation_atli = {
             -- attack
         }
     },
-    log = {name = "log", path = "assets/Zelda-like/log.png", pixelWidth = 32, pixelHeight = 32,
+    log = {name = "log", hitboxWidth = 32, hitboxHeight = 32,
+        path = "assets/Zelda-like/log.png", spriteWidth = 32, spriteHeight = 32,
         animations = {
             idle = { row = 1, frameCount = 4, loop = true, frameDuration = 0.5 },
             patrolling = { row = 1, frameCount = 4, loop = true },
