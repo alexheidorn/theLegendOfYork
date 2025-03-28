@@ -16,6 +16,7 @@ function Input:new()
         attack = {"key:space", "key:x", "button:y"},
         inventory = {"key:e", "button:x"},
         map = {"key:m", "button:start"},
+        deadzone = 0.3,
     }
 end
 
@@ -37,7 +38,7 @@ function Input:handleInput(dt, joystick)
             if inputType == "axis" and joystick then
                 local axis, direction = inputValue:match("([^+-]+)([+-])")
                 local axisValue = joystick:getGamepadAxis(axis)
-                if (direction == "+" and axisValue > 0.2) or (direction == "-" and axisValue < -0.2) then
+                if (direction == "+" and axisValue > self.keybinds.deadzone) or (direction == "-" and axisValue < -self.keybinds.deadzone) then
                     return true
                 end
             end
