@@ -64,7 +64,6 @@ function Game:update(dt)
 end
 
 function setScale(input)
-    local windowWidth = love.graphics.getWidth()
     local windowHeight = love.graphics.getHeight()
     scale = (7.3 / 1200) * windowHeight
 

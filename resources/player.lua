@@ -16,11 +16,7 @@ function Player:new(x, y)
     self.health = 100
     self.maxHealth = 100
     self.speed = 100
-
-    self.hitbox.offsetTop = 16
 end
-
-
 
 function Player:move(moveX, moveY, dt)
     if moveX ~= 0 or moveY ~= 0 then
@@ -40,11 +36,6 @@ function Player:move(moveX, moveY, dt)
     end
 
     Player.super.move(self, moveX, moveY, dt)
-end
-
-function Player:update(dt)
-    -- Player.super.update(self, dt)
-    self.animation:update(dt)
 end
 
 function Player:attack(target)
