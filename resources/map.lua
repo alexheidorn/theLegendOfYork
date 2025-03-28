@@ -1,11 +1,15 @@
 Map = Object:extend()
 
-function Map:new(tileSize,  tileSetPath, quadData, mapData, solidTiles)
-    self.tileset = love.graphics.newImage(tileSetPath)
+function Map:new(name)
+    self.atlas = G.asset_atlas[name]
+    self.tileset = love.graphics.newImage(self.atlas.path)
+    self.tileSize = self.atlas.tileSize
+    local quadData = self.atlas.quadData
+    local solidTiles = self.atlas.solidTiles
+    local mapData = self.atlas.data
     self.tilesetWidth, self.tilesetHeight = self.tileset:getWidth(), self.tileset:getHeight()
     self.width = 0
     self.height = 0
-    self.tileSize = tileSize
     self.solidTiles = solidTiles
 
     self.showCollisionBoxes = true

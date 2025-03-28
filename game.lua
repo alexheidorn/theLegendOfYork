@@ -8,30 +8,16 @@ function Game:new()
 end
 
 function Game:load()
+    -- The game's graphics scale up, this method finds the right ratio
+    setScale()
     -- initialize game componenets
 
-    --Map creation logic
-    -- lab tileset
-    local labQuadInfo = {
-        {' ', 0, 0},
-        {'*', 0, 32},
-        {'<', 32, 32},
-        {'^', 64, 32},
-        {'~', 128, 0},
-    }
-    local solidTiles = {
-        ['*'] = true,
-        ['<'] = true,
-        ['^'] = true,
-        ['~'] = true
-    }
-    local mapTxtFile = love.filesystem.read('assets/maps/map.txt')
-    local testMap = Map(32, 'assets/tilesets/Untitled.png', labQuadInfo, mapTxtFile, solidTiles)
-    self.map = testMap
+    local testMap = Map("lab")
+    self.MAP = testMap
 
-    self.player = Player(64, 64) --starting positon
-    self.input = Input() -- instance of Input class
-    self.enemies = { Enemy(200, 100), Enemy(300, 200)}
+    self.PLAYER = Player(64, 64) --starting positon
+    self.INPUT = Input() -- instance of Input class
+    self.ENEMIES = { Enemy(200, 100, "log"), Enemy(300, 200, "log") }
 
     -- controller detection
     self.joystick = nil
@@ -42,38 +28,52 @@ function Game:load()
     end
 end
 
-
 function Game:update(dt)
-    self.input:handleInput(self.player, dt, self.joystick)
-    self.player:update(dt)
+    self.INPUT:handleInput(dt, self.joystick)
+    self.PLAYER:update(dt)
 
-    for _, enemy in ipairs(self.enemies) do
+    for _, enemy in ipairs(self.ENEMIES) do
         enemy:update(dt)
     end
     
     -- camera logic
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
-    local playerCenterX = self.player.x + self.player.width / 2
-    local playerCenterY = self.player.y + self.player.height / 2
+    local playerCenterX = self.PLAYER.x + self.PLAYER.width / 2
+    local playerCenterY = self.PLAYER.y + self.PLAYER.height / 2
     Cam:lookAt(playerCenterX, playerCenterY)
+    
     
     -- Camera boundaries
     -- Left Boundary
-    if Cam.x < screenWidth / 2 then
-        Cam.x = screenWidth / 2
+    -- if Cam.x < screenWidth / 2 then
+    --     Cam.x = screenWidth / 2
+    -- end
+    -- -- Top Boundary
+    -- if Cam.y < screenHeight / 2 then
+    --     Cam.y = screenHeight / 2
+    -- end
+    -- -- Right Boundary
+    -- if Cam.x > self.map.width * self.map.tileSize - screenWidth / 2 then
+    --     Cam.x = self.map.width * self.map.tileSize - screenWidth / 2
+    -- end
+    -- -- Bottom Boundary
+    -- if Cam.y > self.map.height * self.map.tileSize - screenHeight / 2 then
+    --     Cam.y = self.map.height * self.map.tileSize - screenHeight / 2
+    -- end
+end
+
+function setScale(input)
+    local windowWidth = love.graphics.getWidth()
+    local windowHeight = love.graphics.getHeight()
+    scale = (7.3 / 1200) * windowHeight
+
+    if vertical then
+        scale = (7 / 1200) * windowHeight
     end
-    -- Top Boundary
-    if Cam.y < screenHeight / 2 then
-        Cam.y = screenHeight / 2
-    end
-    -- Right Boundary
-    if Cam.x > self.map.width * self.map.tileSize - screenWidth / 2 then
-        Cam.x = self.map.width * self.map.tileSize - screenWidth / 2
-    end
-    -- Bottom Boundary
-    if Cam.y > self.map.height * self.map.tileSize - screenHeight / 2 then
-        Cam.y = self.map.height * self.map.tileSize - screenHeight / 2
+
+    if Cam then
+        Cam:zoomTo(scale)
     end
 end
 
@@ -83,10 +83,10 @@ function Game:draw()
 
     --camera view
     Cam:attach()
-        self.map:draw()
-        self.player:draw()
+        self.MAP:draw()
+        self.PLAYER:draw()
 
-        for _, enemy in ipairs(self.enemies) do
+        for _, enemy in ipairs(self.ENEMIES) do
             enemy:draw()
         end
     Cam:detach()
@@ -94,7 +94,7 @@ function Game:draw()
 end
 
 function Game:keypressed(key)
-    self.input:handleKeyboard(key, self.player)
+    self.input:handleKeyboard(key)
     if key == "escape" then
         love.event.quit()
     end

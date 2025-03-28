@@ -1,22 +1,25 @@
 Object = require 'lib/classic'
 Entity = Object:extend()
 
-function Entity:new(x, y, spriteSheetPath, width, height, animations)
+function Entity:new(x, y, name)
+    self.entity = G.animation_atli[name]
+    self.spriteSheet = love.graphics.newImage(self.entity.path)
+    self.animations = self.entity.animations
     self.hitbox = {
         x = x or 0,
         y = y or 0,
-        width = width or 16,
-        height = height or 16,
+        width = self.entity.pixelWidth or 16,  -- refactor with new field in atlas
+        height = self.entity.pixelHeight or 16, -- refactor with new field in atlas
         show = true
     }
 
     self.speed = 60 -- Default speed in pixels per second
-    self.animations = animations
+
     self.state = 'idle'
     
     self.sprite = {}
-    self.sprite.width = animations[self.state]['pixelWidth'] or 16
-    self.sprite.height = animations[self.state]['pixelHeight'] or 16
+    self.sprite.width = self.entity.pixelWidth or 16
+    self.sprite.height = self.entity.pixelHeight or 16
     self.sprite.offsetTop = (self.sprite.height / 2 - self.hitbox.height / 2) or 0
     self.sprite.offsetLeft = (self.sprite.width / 2 - self.hitbox.width / 2) or 0
     -- self.sprite.offsetWidth = (self.sprite.width / 2 - self.hitbox.width / 2) or 0
@@ -28,7 +31,7 @@ function Entity:new(x, y, spriteSheetPath, width, height, animations)
             -- self.sprite = Sprite(0, 0, 32, 32, G.ASSET_ATLAS['player'], {x = 0, y = 0})
             -- self.spriteSheet = love.graphics.newImage(G.ASSET_ATLAS['player'])
             -- self.spriteSheet = G.ASSET_ATLAS['player']
-    self.spriteSheet = love.graphics.newImage(spriteSheetPath)
+
     self.animation = Animation(self.spriteSheet, self.sprite.width, self.sprite.height, self.animations[self.state])
 end
 
