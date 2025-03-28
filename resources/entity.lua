@@ -8,8 +8,8 @@ function Entity:new(x, y, name)
     self.hitbox = {
         x = x or 0,
         y = y or 0,
-        width = self.entity.pixelWidth or 16,  -- refactor with new field in atlas
-        height = self.entity.pixelHeight or 16, -- refactor with new field in atlas
+        width = self.entity.hitboxWidth or 32,  -- refactor with new field in atlas
+        height = self.entity.hitboxHeight or 32, -- refactor with new field in atlas
         show = true
     }
 
@@ -18,8 +18,8 @@ function Entity:new(x, y, name)
     self.state = 'idle'
     
     self.sprite = {}
-    self.sprite.width = self.entity.pixelWidth or 16
-    self.sprite.height = self.entity.pixelHeight or 16
+    self.sprite.width = self.entity.spriteWidth or 32
+    self.sprite.height = self.entity.spriteHeight or 32
     self.sprite.offsetTop = (self.sprite.height / 2 - self.hitbox.height / 2) or 0
     self.sprite.offsetLeft = (self.sprite.width / 2 - self.hitbox.width / 2) or 0
     -- self.sprite.offsetWidth = (self.sprite.width / 2 - self.hitbox.width / 2) or 0
