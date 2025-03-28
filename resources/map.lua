@@ -36,10 +36,6 @@ function Map:new(name)
     self.height = #self.tileTable
 end
 
-function Map:update()
-    
-end
-
 function Map:draw()
     for row = 1, #self.tileTable do
         for col = 1, #self.tileTable[row] - 1 do
@@ -68,8 +64,6 @@ end
 function Map:collides(x, y, width, height)
     return self:_collides(x, y) or self:_collides(x + width, y) or self:_collides(x, y + height) or self:_collides(x + width, y + height)
 end
-
-
 
 function Map:_collides(x, y)
     -- check for collisions with solid tiles
