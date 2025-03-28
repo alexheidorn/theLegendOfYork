@@ -39,8 +39,8 @@ function Game:update(dt)
     -- camera logic
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
-    local playerCenterX = self.PLAYER.x + self.PLAYER.width / 2
-    local playerCenterY = self.PLAYER.y + self.PLAYER.height / 2
+    local playerCenterX = self.PLAYER.hitbox.x + self.PLAYER.hitbox.width / 2
+    local playerCenterY = self.PLAYER.hitbox.y + self.PLAYER.hitbox.height / 2
     Cam:lookAt(playerCenterX, playerCenterY)
     
     
