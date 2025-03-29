@@ -18,19 +18,21 @@ function Pause:new()
 end
 
 function Pause:toggle()
-    if self.paused then
-        -- self:close()
-    else
+    if not self.paused then
         self:open()
+    else
+        self:close()
     end
 end
 
 function Pause:open()
     self.paused = true
+    G.GAME_STATE = G.GAME_STATES.paused
 end
 
 function Pause:close()
     self.paused = false
+    G.GAME_STATE = G.GAME_STATES.gameplay
 end
 
 function Pause:selectOption()
@@ -57,16 +59,16 @@ function Pause:confirmOption()
     end
 end
 
-function Pause:keypressed(key)
-    if key == 'escape' then
+function Pause:keypressed()
+    if G.INPUT:pressed("pause") then
         self:toggle()
     end
     if self.paused then
-        if key == 'up' then
+        if G.INPUT:pressed("up") then
             self:deselectOption()
-        elseif key == 'down' then
+        elseif G.INPUT:pressed("down") then
             self:selectOption()
-        elseif key == 'return' then
+        elseif G.INPUT:pressed("confirm") then
             self:confirmOption()
         end
     end
@@ -74,7 +76,7 @@ end
 
 function Pause:update(dt)
     if self.paused then
-        
+        self:keypressed()
     end
 end
 
