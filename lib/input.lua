@@ -58,10 +58,5 @@ function Input:update(dt)
     if self:pressed("pause") then
         -- Pause the game or perform any other action
         G.PAUSE:toggle()
-        if not Pause.paused then
-            G.GAME_STATE = G.GAME_STATES.paused
-        else
-            G.GAME_STATE = G.GAME_STATES.gameplay
-        end
     end
 end
