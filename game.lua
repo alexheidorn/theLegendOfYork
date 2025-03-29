@@ -29,7 +29,6 @@ function Game:load()
 end
 
 function Game:update(dt)
-    self.INPUT:handleInput(dt, self.joystick)
     self.PLAYER:update(dt)
 
     for _, enemy in ipairs(self.ENEMIES) do
@@ -91,18 +90,10 @@ function Game:draw()
         
 end
 
-function Game:keypressed(key)
-    self.input:handleKeyboard(key)
-    if key == "escape" then
-        love.event.quit()
-    end
-end
-
 function Game:gamepadpressed(joystick, button)
     print("Gamepad button " .. button .. " was pressed on " .. joystick:getGamepadName(
         joystick
     ))
-    self.input:handleGamepad(button, self.player, joystick)
 end
 
 function love.gamepadreleased(joystick, button)
