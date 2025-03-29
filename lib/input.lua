@@ -20,6 +20,14 @@ function Input:new()
     }
 end
 
+function Input:bind(action, input)
+    if not self.keybinds[action] then
+        self.keybinds[action] = {}
+    end
+
+    table.insert(self.keybinds[action], input)
+end
+
 function Input:pressed(action, joystick)
     for _, input in ipairs(self.keybinds[action] or {}) do
         local inputType, inputValue = input:match("([^:]+):([^:]+)")
@@ -43,4 +51,17 @@ function Input:pressed(action, joystick)
     return false
 end
 
-
+function Input:update(dt)
+    -- Update input state if needed
+    -- For example, you can check for key presses or joystick movements here
+    -- and update the input state accordingly.
+    if self:pressed("pause") then
+        -- Pause the game or perform any other action
+        Pause:toggle()
+        if Pause.paused then
+            G.GAME_STATE = G.GAME_STATES.gameplay
+        else
+            G.GAME_STATE = G.GAME_STATES.pause
+        end
+    end
+end
