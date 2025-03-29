@@ -4,6 +4,7 @@ Camera = require 'lib/camera'
 
 require 'game'
 require 'globals'
+require 'resources/ui/pause'
 require 'assets/sprites'
 require 'lib/input'
 require 'lib/animation'
