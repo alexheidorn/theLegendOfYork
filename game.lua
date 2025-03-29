@@ -29,6 +29,13 @@ function Game:load()
 end
 
 function Game:update(dt)
+    self.INPUT:update(dt)
+
+    if G.GAME_STATE == G.GAME_STATES.title_screen then
+        -- Main menu logic here
+        -- For example, you can check for key presses to navigate the menu
+    end
+    if G.GAME_STATE == G.GAME_STATES.paused then return end
     self.PLAYER:update(dt)
 
     for _, enemy in ipairs(self.ENEMIES) do
@@ -87,7 +94,7 @@ function Game:draw()
     Cam:detach()
     --HUD
     love.graphics.print("Hello worlf!")
-        
+    Pause:draw()
 end
 
 function Game:gamepadpressed(joystick, button)
