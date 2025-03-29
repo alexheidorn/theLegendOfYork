@@ -12,13 +12,18 @@ function Game:setGlobals()
     self.ANIMATIONS = {}
     self.DRAW_HASH = {}
 
-    self.GAME_STATE = {
-        main_menu = 0,
+    self.GAME_STATES = {
+        title_screen = 0,
         gameplay = 1,
         pause = 2,
         inventory = 3,
         map = 4,
+        dialogue = 5,
+        battle = 6,
+        cutscene = 7,
     }
+    self.GAME_STATE = self.GAME_STATES.gameplay
+    self.CURRENT_MAP = nil
 
 end
 
