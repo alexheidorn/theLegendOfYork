@@ -36,7 +36,10 @@ function Game:update(dt)
         -- Main menu logic here
         -- For example, you can check for key presses to navigate the menu
     end
-    if G.GAME_STATE == G.GAME_STATES.paused then return end
+    if G.GAME_STATE == G.GAME_STATES.paused then 
+        G.PAUSE:update(dt) 
+        return
+    end
     self.PLAYER:update(dt)
 
     for _, enemy in ipairs(self.ENEMIES) do
