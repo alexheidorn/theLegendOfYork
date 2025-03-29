@@ -16,6 +16,7 @@ function Game:load()
     self.MAP = testMap
 
     self.PLAYER = Player(64, 64) --starting positon
+    self.PAUSE = Pause()
     self.INPUT = Input() -- instance of Input class
     self.ENEMIES = { Enemy(200, 100, "log"), Enemy(300, 200, "log") }
 
@@ -94,7 +95,7 @@ function Game:draw()
     Cam:detach()
     --HUD
     love.graphics.print("Hello worlf!")
-    Pause:draw()
+    G.PAUSE:draw()
 end
 
 function Game:gamepadpressed(joystick, button)
