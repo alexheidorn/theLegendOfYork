@@ -15,7 +15,7 @@ function Game:setGlobals()
     self.GAME_STATES = {
         title_screen = 0,
         gameplay = 1,
-        pause = 2,
+        paused = 2,
         inventory = 3,
         map = 4,
         dialogue = 5,
@@ -23,6 +23,7 @@ function Game:setGlobals()
         cutscene = 7,
     }
     self.GAME_STATE = self.GAME_STATES.gameplay
+
     self.CURRENT_MAP = nil
 
 end
