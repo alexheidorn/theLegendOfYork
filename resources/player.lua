@@ -38,6 +38,27 @@ function Player:move(moveX, moveY, dt)
     Player.super.move(self, moveX, moveY, dt)
 end
 
+function Player:update(dt)
+    local moveX, moveY = 0, 0
+    -- check for movement input
+    if G.INPUT:pressed("left") then moveX = moveX - 1 end
+    if G.INPUT:pressed("right") then moveX = moveX + 1 end
+    if G.INPUT:pressed("up") then moveY = moveY - 1 end
+    if G.INPUT:pressed("down") then moveY = moveY + 1 end
+    
+
+    -- normalize diagonal movement
+    if moveX ~= 0 and moveY ~= 0 then
+        local length = math.sqrt(moveX * moveX + moveY * moveY)
+        moveX, moveY = moveX / length, moveY / length
+    end
+
+    -- apply movement
+    self:move(moveX, moveY, dt)
+
+    Player.super.update(self, dt)
+end
+
 function Player:attack(target)
     -- Perform attack logic here
     print("Attacking " .. target.name)
