@@ -20,45 +20,27 @@ function Input:new()
     }
 end
 
-function Input:handleInput(dt, joystick)
-    local moveX, moveY = 0, 0
+function Input:pressed(action, joystick)
+    for _, input in ipairs(self.keybinds[action] or {}) do
+        local inputType, inputValue = input:match("([^:]+):([^:]+)")
 
-    local function _pressed(action)
-        for _, input in ipairs(self.keybinds[action] or {}) do
-            local inputType, inputValue = input:match("([^:]+):([^:]+)")
+        if inputType == "key" and love.keyboard.isDown(inputValue) then
+            return true
+        end
 
-            if inputType == "key" and love.keyboard.isDown(inputValue) then
+        if inputType == "button" and joystick and joystick:isGamepadDown(inputValue) then
+            return true
+        end
+
+        if inputType == "axis" and joystick then
+            local axis, direction = inputValue:match("([^+-]+)([+-])")
+            local axisValue = joystick:getGamepadAxis(axis)
+            if (direction == "+" and axisValue > self.keybinds.deadzone) or (direction == "-" and axisValue < -self.keybinds.deadzone) then
                 return true
-            end
-
-            if inputType == "button" and joystick and joystick:isGamepadDown(inputValue) then
-                return true
-            end
-
-            if inputType == "axis" and joystick then
-                local axis, direction = inputValue:match("([^+-]+)([+-])")
-                local axisValue = joystick:getGamepadAxis(axis)
-                if (direction == "+" and axisValue > self.keybinds.deadzone) or (direction == "-" and axisValue < -self.keybinds.deadzone) then
-                    return true
-                end
             end
         end
-        return false
     end
-
-    -- check for movement input
-    if _pressed("left") then moveX = moveX - 1 end
-    if _pressed("right") then moveX = moveX + 1 end
-    if _pressed("up") then moveY = moveY - 1 end
-    if _pressed("down") then moveY = moveY + 1 end
-    
-
-    -- normalize diagonal movement
-    if moveX ~= 0 and moveY ~= 0 then
-        local length = math.sqrt(moveX * moveX + moveY * moveY)
-        moveX, moveY = moveX / length, moveY / length
-    end
-
-    -- apply movement
-    G.PLAYER:move(moveX, moveY, dt)
+    return false
 end
+
+
