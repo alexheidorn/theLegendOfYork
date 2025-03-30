@@ -30,15 +30,17 @@ function TitleScreen:update(dt)
     -- fade out
 end
 
-function TitleScreen:draw()
-    -- intro text after selecting 'start'
-    local fontSize = 20*G.scale
-    local tempFont = love.graphics.newFont(fontSize)
-    love.graphics.setFont(tempFont)
-    love.graphics.setColor(1, 1, 1, 1)
-    -- love.graphics.setFont(G.fonts.title)
+    function TitleScreen:draw()
+    if G.GAME_STATE == G.GAME_STATES.title_screen then
+        -- intro text after selecting 'start'
+        local fontSize = 20*G.scale
+        local tempFont = love.graphics.newFont(fontSize)
+        love.graphics.setFont(tempFont)
+        love.graphics.setColor(1, 1, 1, 1)
+        -- love.graphics.setFont(G.fonts.title)
 
-    love.graphics.printf(self.text[1], 0, love.graphics.getHeight()/2 - 200, love.graphics.getWidth(), "center")
-    love.graphics.printf(self.text[2], 0, love.graphics.getHeight()/2 - 150, love.graphics.getWidth(), "center")
-    love.graphics.printf(self.text[3], 0, love.graphics.getHeight()/2 - 50, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[1], 0, love.graphics.getHeight()/2 - 50*G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[2], 0, love.graphics.getHeight()/2 - 4*G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[3], 0, love.graphics.getHeight()/2 - 30*G.scale, love.graphics.getWidth(), "center")
+    end
 end 

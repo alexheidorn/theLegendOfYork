@@ -49,6 +49,7 @@ function Game:update(dt)
         -- Main menu logic here
         -- For example, you can check for key presses to navigate the menu
         self.TITLE_SCREEN:update(dt)
+        return
     end
     if G.GAME_STATE == G.GAME_STATES.paused then 
         G.PAUSE:update(dt) 
@@ -91,10 +92,8 @@ end
 
 
 function Game:draw()
-    if G.GAME_STATE == G.GAME_STATES.title_screen then 
-        self.TITLE_SCREEN:draw()
-        return
-     end
+    G.TITLE_SCREEN:draw()
+    if G.GAME_STATE == G.GAME_STATES.title_screen then return end
     --camera view
     self.CAM:attach()
         self.MAP:draw()
