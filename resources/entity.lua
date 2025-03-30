@@ -105,6 +105,11 @@ function Entity:draw()
         love.graphics.setColor(255, 255, 255, 255) -- Reset color
     end
 
+    -- Blink effect: hide sprite on alternate frames on stun
+    if self.stunTimer > 0 and math.floor(self.stunTimer * 10) % 2 == 0 then
+        return -- Skip drawing the sprite if stunned
+    end
+
     -- draw the entity's sprite on top
     self.animation:draw(self.hitbox.x - self.sprite.offsetLeft, self.hitbox.y - self.sprite.offsetTop) 
 

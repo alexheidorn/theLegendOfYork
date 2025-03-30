@@ -44,6 +44,24 @@ function Player:collidesWithEnemy()
         if entity:collides(self.hitbox) then
             self.stunTimer = 0.5 -- stun for 0.5 seconds
             self:setState('stun')
+
+            -- Knockback effect
+            local knockbackX = (self.hitbox.x - entity.hitbox.x) * 0.5
+            local knockbackY = (self.hitbox.y - entity.hitbox.y) * 0.5
+            -- Normalize the knockback vector
+            local magnitude = math.sqrt(knockbackX * knockbackX + knockbackY * knockbackY)
+            if magnitude > 0 and self.stunTimer == 0 then
+                knockbackX = knockbackX / magnitude * 10
+                knockbackY = knockbackY / magnitude * 10
+            end
+
+            -- Apply knockback to the player
+            self.hitbox.x = self.hitbox.x + knockbackX
+            self.hitbox.y = self.hitbox.y + knockbackY
+
+            -- Play hit sound
+            -- G.AUDIO:playSound("hit_sound")
+
             return true
         end
     end
