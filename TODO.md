@@ -46,6 +46,8 @@
         - [ ] create fade transition out of titlescreen
         - [ ] add options on titlescreen
         - [ ] fix jump when transitioning to gameplay
+    - [ ] create fonts atlas for UI
+        - [ ] implement fonts in title screen & pause menu
 
 - [ ] create map editor
 
