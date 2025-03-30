@@ -14,7 +14,8 @@ function Entity:new(x, y, name)
     }
 
     self.speed = 60 -- Default speed in pixels per second
-
+    self.stunTimer = 0
+    self.stunDuration = 0.5 -- Duration of stun in seconds
     self.state = 'idle'
     
     self.sprite = {}
@@ -35,6 +36,23 @@ function Entity:new(x, y, name)
     self.animation = Animation(self.spriteSheet, self.sprite.width, self.sprite.height, self.animations[self.state])
 end
 
+function Entity:collides(otherHitbox)
+    return self.hitbox.x < otherHitbox.x + otherHitbox.width and
+           self.hitbox.x + self.hitbox.width > otherHitbox.x and
+           self.hitbox.y < otherHitbox.y + otherHitbox.height and
+           self.hitbox.y + self.hitbox.height > otherHitbox.y
+end
+
+function Entity:collidesWithEntity()
+    -- Check for collision with enemies or other entities
+    for _, entity in ipairs(G.ENTITIES) do
+        if entity ~= self and entity:collides(self.hitbox) then
+            return true
+        end
+    end
+    return false
+end
+
 function Entity:setState(newState)
     if self.state ~= newState and self.animations[newState] then
         self.state = newState
@@ -44,9 +62,16 @@ end
 
 function Entity:update(dt)
     self.animation:update(dt)
+
+    -- Update the stun timer
+    if self.stunTimer > 0 then
+        self.stunTimer = self.stunTimer - dt
+    end
 end
 
 function Entity:move(moveX, moveY, dt)
+    if self.stunTimer > 0 then return end -- Prevent movement while stunned
+
     local moveAmount = self.speed * dt
 
     -- Check X movement
@@ -66,6 +91,9 @@ function Entity:draw()
     -- draw the entity's collision box
     if self.hitbox.show then
         love.graphics.setColor(255, 0, 0, 128) -- Red with 50% transparency
+        if self:collidesWithEntity() then
+            love.graphics.setColor(0, 255, 0, .5) -- green
+        end
         love.graphics.rectangle(
             "line", 
             self.hitbox.x,
@@ -75,6 +103,11 @@ function Entity:draw()
             8, 8 -- Rounded corners with radius 8
         ) 
         love.graphics.setColor(255, 255, 255, 255) -- Reset color
+    end
+
+    -- Blink effect: hide sprite on alternate frames on stun
+    if self.stunTimer > 0 and math.floor(self.stunTimer * 10) % 2 == 0 then
+        return -- Skip drawing the sprite if stunned
     end
 
     -- draw the entity's sprite on top

@@ -38,6 +38,36 @@ function Player:move(moveX, moveY, dt)
     Player.super.move(self, moveX, moveY, dt)
 end
 
+function Player:collidesWithEnemy()
+    -- Check for collision with enemies specifically
+    for _, entity in ipairs(G.ENEMIES) do
+        if entity:collides(self.hitbox) then
+            self.stunTimer = 0.5 -- stun for 0.5 seconds
+            self:setState('stun')
+
+            -- Knockback effect
+            local knockbackX = (self.hitbox.x - entity.hitbox.x) * 0.5
+            local knockbackY = (self.hitbox.y - entity.hitbox.y) * 0.5
+            -- Normalize the knockback vector
+            local magnitude = math.sqrt(knockbackX * knockbackX + knockbackY * knockbackY)
+            if magnitude > 0 and self.stunTimer == 0 then
+                knockbackX = knockbackX / magnitude * 10
+                knockbackY = knockbackY / magnitude * 10
+            end
+
+            -- Apply knockback to the player
+            self.hitbox.x = self.hitbox.x + knockbackX
+            self.hitbox.y = self.hitbox.y + knockbackY
+
+            -- Play hit sound
+            -- G.AUDIO:playSound("hit_sound")
+
+            return true
+        end
+    end
+    return false
+end
+
 function Player:update(dt)
     local moveX, moveY = 0, 0
     -- check for movement input
@@ -45,7 +75,8 @@ function Player:update(dt)
     if G.INPUT:handleInput("right") then moveX = moveX + 1 end
     if G.INPUT:handleInput("up") then moveY = moveY - 1 end
     if G.INPUT:handleInput("down") then moveY = moveY + 1 end
-    
+    if G.INPUT:handleInput("attack") then self:attack() end
+    if G.INPUT:handleInput("interact") then self:interact() end
 
     -- normalize diagonal movement
     if moveX ~= 0 and moveY ~= 0 then
@@ -53,6 +84,7 @@ function Player:update(dt)
         moveX, moveY = moveX / length, moveY / length
     end
 
+    self:collidesWithEnemy()
     -- apply movement
     self:move(moveX, moveY, dt)
 
