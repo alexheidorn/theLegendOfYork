@@ -42,13 +42,13 @@ function love.keyreleased(key)
 end
 
 function Input:gamepadpressed(joystick, button)
-    self.pressedInputs[button] = true
-    self.heldInputs[button] = true
+    G.INPUT.pressedInputs[button] = true
+    G.INPUT.self.heldInputs[button] = true
 end
 
 function Input:gamepadreleased(joystick, button) 
-    self.releasedInputs[button] = true 
-    self.heldInputs[button] = nil
+    G.INPUT.heldInputs[button] = nil
+    G.INPUT.releasedInputs[button] = true 
 end
 
 
@@ -56,6 +56,7 @@ function Input:inputPressed(action)
     if self.keybinds[action] then
         for _, input in ipairs(self.keybinds[action]) do
             local inputType, inputValue = input:match("([^:]+):([^:]+)")
+            -- bug: pressing 'a' on keyboard will trigger 'confirm' action
             if self.pressedInputs[inputValue] then
                 return true
             end
@@ -92,7 +93,7 @@ function Input:update(dt)
     -- Update input state if needed
     -- For example, you can check for key presses or joystick movements here
     -- and update the input state accordingly.
-    if self:handleInput("pause") then
+    if self:inputPressed("pause") then
         -- Pause the game or perform any other action
         G.PAUSE:toggle()
     end
