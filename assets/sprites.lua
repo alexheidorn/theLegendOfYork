@@ -45,3 +45,20 @@ G.asset_atlas = {
 }
 
 -- populate entries in the global asset atlas
+
+for _, atlas in pairs(G.asset_atlas) do
+    local atlasName = atlas.name
+    local atlasPath = atlas.path
+    local atlasTileSize = atlas.tileSize
+    local atlasQuadData = atlas.quadData
+    local atlasSolidTiles = atlas.solidTiles
+    local atlasData = atlas.data
+
+    G.asset_atlas[atlasName] = {
+        path = atlasPath,
+        tileSize = atlasTileSize,
+        quadData = atlasQuadData,
+        solidTiles = atlasSolidTiles,
+        data = atlasData
+    }            
+end
