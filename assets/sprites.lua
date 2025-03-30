@@ -54,11 +54,17 @@ for _, atlas in pairs(G.asset_atlas) do
     local atlasSolidTiles = atlas.solidTiles
     local atlasData = atlas.data
 
-    G.asset_atlas[atlasName] = {
+    G.ASSET_ATLAS[atlasName] = {
+        name = atlasName,
         path = atlasPath,
         tileSize = atlasTileSize,
-        quadData = atlasQuadData,
+        quadData = {},
         solidTiles = atlasSolidTiles,
         data = atlasData
-    }            
+    }
+
+    for _, info in ipairs(atlasQuadData) do
+        -- info[1] = char, info[2] = x, info[3] = y
+        G.ASSET_ATLAS[atlasName].quadData[info[1]] = love.graphics.newQuad(info[2], info[3], atlasTileSize, atlasTileSize, atlasTileSize, atlasTileSize)
+    end
 end
