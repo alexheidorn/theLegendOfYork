@@ -35,6 +35,13 @@ function Entity:new(x, y, name)
     self.animation = Animation(self.spriteSheet, self.sprite.width, self.sprite.height, self.animations[self.state])
 end
 
+function Entity:collides(otherHitbox)
+    return self.x < otherHitbox.x + otherHitbox.width and
+           self.x + self.width > otherHitbox.x and
+           self.y < otherHitbox.y + otherHitbox.height and
+           self.y + self.height > otherHitbox.y
+end
+
 function Entity:setState(newState)
     if self.state ~= newState and self.animations[newState] then
         self.state = newState
