@@ -38,6 +38,18 @@ function Player:move(moveX, moveY, dt)
     Player.super.move(self, moveX, moveY, dt)
 end
 
+function Player:collidesWithEnemy()
+    -- Check for collision with enemies specifically
+    for _, entity in ipairs(G.ENEMIES) do
+        if entity:collides(self.hitbox) then
+            self.stunTimer = 0.5 -- stun for 0.5 seconds
+            self:setState('stun')
+            return true
+        end
+    end
+    return false
+end
+
 function Player:update(dt)
     local moveX, moveY = 0, 0
     -- check for movement input
@@ -45,7 +57,8 @@ function Player:update(dt)
     if G.INPUT:handleInput("right") then moveX = moveX + 1 end
     if G.INPUT:handleInput("up") then moveY = moveY - 1 end
     if G.INPUT:handleInput("down") then moveY = moveY + 1 end
-    
+    if G.INPUT:handleInput("attack") then self:attack() end
+    if G.INPUT:handleInput("interact") then self:interact() end
 
     -- normalize diagonal movement
     if moveX ~= 0 and moveY ~= 0 then
@@ -53,6 +66,7 @@ function Player:update(dt)
         moveX, moveY = moveX / length, moveY / length
     end
 
+    self:collidesWithEnemy()
     -- apply movement
     self:move(moveX, moveY, dt)
 
