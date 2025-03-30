@@ -61,9 +61,6 @@ end
 
 function Pause:update(dt)
     if self.paused then
-        if G.INPUT:inputPressed("pause") then
-            self:toggle()
-        end
         if G.INPUT:inputPressed("up") then
             self:deselectOption()
         elseif G.INPUT:inputPressed("down") then
@@ -76,11 +73,14 @@ function Pause:update(dt)
 end
 
 function Pause:draw()
+    local fontSize = 15*G.scale
+    local tempFont = love.graphics.newFont(fontSize)
+    love.graphics.setFont(tempFont)
     if self.paused then
         love.graphics.setColor(0, 0, 0, 0.7 * --[[self.alpha]] 1)
         love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         love.graphics.setColor(1, 1, 1, self.alpha)
-        love.graphics.printf('PAUSE', 0, 100, love.graphics.getWidth(), 'center')
+        love.graphics.printf('PAUSE', 0,100, love.graphics.getWidth(), 'center')
 
         for i, option in ipairs(self.menuOptions) do
             if i == self.selectedOption then
