@@ -16,11 +16,22 @@ function Game:load()
     local testMap = Map("lab")
     self.MAP = testMap
 
-    self.PLAYER = Player(64, 64) --starting positon
-    self.PAUSE = Pause()
     self.TITLE_SCREEN = TitleScreen()
+    self.PAUSE = Pause()
     self.INPUT = Input() -- instance of Input class
+
+    self.PLAYER = Player(64, 64) --starting positon
     self.ENEMIES = { Enemy(200, 100, "log"), Enemy(300, 200, "log") }
+    self.ITEMS = {} -- { Item("health_potion", 1), Item("mana_potion", 2) } -- example items
+    self.ENTITIES = {
+        self.PLAYER,
+    }
+    for _, enemy in ipairs(self.ENEMIES) do
+        table.insert(self.ENTITIES, enemy)
+    end
+    for _, item in ipairs(self.ITEMS) do
+        table.insert(self.ENTITIES, item)
+    end
 
     -- controller detection
     self.joystick = nil
@@ -55,10 +66,9 @@ function Game:update(dt)
         G.PAUSE:update(dt) 
         return
     end
-    self.PLAYER:update(dt)
     
-    for _, enemy in ipairs(self.ENEMIES) do
-        enemy:update(dt)
+    for _, entity in ipairs(self.ENTITIES) do
+        entity:update(dt)
     end
     
     -- camera logic
