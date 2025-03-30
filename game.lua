@@ -30,8 +30,6 @@ function Game:load()
 end
 
 function Game:update(dt)
-    self.INPUT:update(dt)
-
     if G.GAME_STATE == G.GAME_STATES.title_screen then
         -- Main menu logic here
         -- For example, you can check for key presses to navigate the menu
@@ -41,7 +39,7 @@ function Game:update(dt)
         return
     end
     self.PLAYER:update(dt)
-
+    
     for _, enemy in ipairs(self.ENEMIES) do
         enemy:update(dt)
     end
@@ -71,6 +69,8 @@ function Game:update(dt)
     -- if Cam.y > self.map.height * self.map.tileSize - screenHeight / 2 then
     --     Cam.y = self.map.height * self.map.tileSize - screenHeight / 2
     -- end
+    
+    self.INPUT:update(dt)
 end
 
 function setScale(input)
