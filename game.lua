@@ -9,9 +9,10 @@ end
 
 function Game:load()
     -- The game's graphics scale up, this method finds the right ratio
-    setScale()
+    self.CAM = Camera()
+    self:setScale()
     -- initialize game componenets
-
+    
     local testMap = Map("lab")
     self.MAP = testMap
 
@@ -26,6 +27,19 @@ function Game:load()
     if #joysticks > 0 then
         print("Found " .. #joysticks .. " joystick(s)")
         self.joystick = joysticks[1]
+    end
+end
+
+function Game:setScale(input)
+    local windowHeight = love.graphics.getHeight()
+    self.scale = (7.3 / 1200) * windowHeight
+
+    if self.vertical then
+        self.scale = (7 / 1200) * windowHeight
+    end
+
+    if self.CAM then
+        self.CAM:zoomTo(self.scale)
     end
 end
 
@@ -49,7 +63,7 @@ function Game:update(dt)
     local screenHeight = love.graphics.getHeight()
     local playerCenterX = self.PLAYER.hitbox.x + self.PLAYER.hitbox.width / 2
     local playerCenterY = self.PLAYER.hitbox.y + self.PLAYER.hitbox.height / 2
-    Cam:lookAt(playerCenterX, playerCenterY)
+    self.CAM:lookAt(playerCenterX, playerCenterY)
     
     
     -- Camera boundaries
@@ -73,29 +87,17 @@ function Game:update(dt)
     self.INPUT:update(dt)
 end
 
-function setScale(input)
-    local windowHeight = love.graphics.getHeight()
-    scale = (7.3 / 1200) * windowHeight
-
-    if vertical then
-        scale = (7 / 1200) * windowHeight
-    end
-
-    if Cam then
-        Cam:zoomTo(scale)
-    end
-end
 
 function Game:draw()
     --camera view
-    Cam:attach()
+    self.CAM:attach()
         self.MAP:draw()
         self.PLAYER:draw()
 
         for _, enemy in ipairs(self.ENEMIES) do
             enemy:draw()
         end
-    Cam:detach()
+    self.CAM:detach()
     --HUD
     love.graphics.print("Hello worlf!")
     G.PAUSE:draw()

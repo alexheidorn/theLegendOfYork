@@ -1,7 +1,9 @@
 -- Globals
 
 function Game:setGlobals()
-    Cam = Camera()
+    self.CAM = nil
+    self.scale = 1
+    self.vertical = false
 
     --||||||||||||||||||||||||||||||
     --          INSTANCES
