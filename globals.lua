@@ -24,7 +24,7 @@ function Game:setGlobals()
         battle = 6,
         cutscene = 7,
     }
-    self.GAME_STATE = self.GAME_STATES.gameplay
+    self.GAME_STATE = self.GAME_STATES.title_screen
 
     self.CURRENT_MAP = nil
 
