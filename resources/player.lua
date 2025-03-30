@@ -41,10 +41,10 @@ end
 function Player:update(dt)
     local moveX, moveY = 0, 0
     -- check for movement input
-    if G.INPUT:pressed("left") then moveX = moveX - 1 end
-    if G.INPUT:pressed("right") then moveX = moveX + 1 end
-    if G.INPUT:pressed("up") then moveY = moveY - 1 end
-    if G.INPUT:pressed("down") then moveY = moveY + 1 end
+    if G.INPUT:handleInput("left") then moveX = moveX - 1 end
+    if G.INPUT:handleInput("right") then moveX = moveX + 1 end
+    if G.INPUT:handleInput("up") then moveY = moveY - 1 end
+    if G.INPUT:handleInput("down") then moveY = moveY + 1 end
     
 
     -- normalize diagonal movement
