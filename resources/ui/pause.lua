@@ -21,7 +21,7 @@ function Pause:toggle()
     if not self.paused then
         self:open()
     else
-        -- self:close()
+        self:close()
     end
 end
 
@@ -59,11 +59,11 @@ function Pause:confirmOption()
     end
 end
 
-function Pause:keypressed()
-    if G.INPUT:inputPressed("pause") then
-        self:toggle()
-    end
+function Pause:update(dt)
     if self.paused then
+        if G.INPUT:inputPressed("pause") then
+            self:toggle()
+        end
         if G.INPUT:inputPressed("up") then
             self:deselectOption()
         elseif G.INPUT:inputPressed("down") then
@@ -72,12 +72,7 @@ function Pause:keypressed()
             self:confirmOption()
         end
     end
-end
-
-function Pause:update(dt)
-    if self.paused then
-        self:keypressed()
-    end
+    G.INPUT:update(dt)
 end
 
 function Pause:draw()
