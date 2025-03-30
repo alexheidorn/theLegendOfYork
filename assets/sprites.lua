@@ -22,6 +22,23 @@ G.animation_atli = {
         }
     },
 }
+
+-- items
+G.items = {
+    sword = {name = "sword", path = "assets/items/sword.png", spriteWidth = 16, spriteHeight = 16,
+        animations = {
+            idle = { row = 1, frameCount = 4, loop = true, frameDuration = 0.5 },
+            attack = { row = 1, frameCount = 4, loop = true },
+        }
+    },
+    shield = {name = "shield", path = "assets/items/shield.png", spriteWidth = 16, spriteHeight = 16,
+        animations = {
+            idle = { row = 1, frameCount = 4, loop = true, frameDuration = 0.5 },
+            block = { row = 1, frameCount = 4, loop = true },
+        }
+    },
+}
+
 -- tilesets
 G.asset_atlas = {
     lab = {name = "lab", path = "assets/tilesets/Untitled.png", tileSize = 32, 
@@ -42,6 +59,18 @@ G.asset_atlas = {
     },
     {name = "overworld", path = "assets/Zelda-like/Overworld.png", pwidth = 32, pheight = 32},
     {name = "inside", path = "assets/Zelda-like/Inner.png", pwidth = 16, pheight = 16},
+}
+
+-- fonts
+G.fonts = {
+    temp = love.graphics.newFont(16),
+    main = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    title = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    pause = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    battle = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    dialogue = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    inventory = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    map = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
 }
 
 -- populate entries in the global asset atlas
