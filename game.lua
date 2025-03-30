@@ -101,22 +101,6 @@ function Game:draw()
     G.PAUSE:draw()
 end
 
-function Game:gamepadpressed(joystick, button)
-    print("Gamepad button " .. button .. " was pressed on " .. joystick:getGamepadName(
-        joystick
-    ))
-end
-
-function love.gamepadreleased(joystick, button)
-    print("Gamepad button released:", button)
-end
-
-function love.gamepadaxis(joystick, axis, value)
-    if math.abs(value) > 0.2 then -- Deadzone to ignore small movements
-        print("Gamepad axis " .. axis .. " moved to " .. value)
-    end
-end
-
 function TitleScreen()
     -- intro text after selecting 'start'
     love.graphics.print([[
