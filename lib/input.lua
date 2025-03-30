@@ -55,7 +55,8 @@ end
 function Input:inputPressed(action)
     if self.keybinds[action] then
         for _, input in ipairs(self.keybinds[action]) do
-            if self.pressedInputs[input] then
+            local inputType, inputValue = input:match("([^:]+):([^:]+)")
+            if self.pressedInputs[inputValue] then
                 return true
             end
         end
