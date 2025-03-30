@@ -14,7 +14,8 @@ function Entity:new(x, y, name)
     }
 
     self.speed = 60 -- Default speed in pixels per second
-
+    self.stunTimer = 0
+    self.stunDuration = 0.5 -- Duration of stun in seconds
     self.state = 'idle'
     
     self.sprite = {}
@@ -61,9 +62,16 @@ end
 
 function Entity:update(dt)
     self.animation:update(dt)
+
+    -- Update the stun timer
+    if self.stunTimer > 0 then
+        self.stunTimer = self.stunTimer - dt
+    end
 end
 
 function Entity:move(moveX, moveY, dt)
+    if self.stunTimer > 0 then return end -- Prevent movement while stunned
+
     local moveAmount = self.speed * dt
 
     -- Check X movement
