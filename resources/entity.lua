@@ -36,10 +36,20 @@ function Entity:new(x, y, name)
 end
 
 function Entity:collides(otherHitbox)
-    return self.x < otherHitbox.x + otherHitbox.width and
-           self.x + self.width > otherHitbox.x and
-           self.y < otherHitbox.y + otherHitbox.height and
-           self.y + self.height > otherHitbox.y
+    return self.hitbox.x < otherHitbox.x + otherHitbox.width and
+           self.hitbox.x + self.hitbox.width > otherHitbox.x and
+           self.hitbox.y < otherHitbox.y + otherHitbox.height and
+           self.hitbox.y + self.hitbox.height > otherHitbox.y
+end
+
+function Entity:collidesWithEntity()
+    -- Check for collision with enemies or other entities
+    for _, entity in ipairs(G.ENTITIES) do
+        if entity ~= self and entity:collides(self.hitbox) then
+            return true
+        end
+    end
+    return false
 end
 
 function Entity:setState(newState)
@@ -73,6 +83,9 @@ function Entity:draw()
     -- draw the entity's collision box
     if self.hitbox.show then
         love.graphics.setColor(255, 0, 0, 128) -- Red with 50% transparency
+        if self:collidesWithEntity() then
+            love.graphics.setColor(0, 255, 0, .5) -- green
+        end
         love.graphics.rectangle(
             "line", 
             self.hitbox.x,
