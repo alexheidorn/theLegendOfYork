@@ -19,6 +19,11 @@ function Player:new(x, y)
 end
 
 function Player:move(moveX, moveY, dt)
+    if self.stunTimer > 0 then 
+        self.animation:pause()
+        return -- Prevent movement while stunned
+    end
+
     if moveX ~= 0 or moveY ~= 0 then
         -- self.state = 'walk'
         self.animation:play()
@@ -40,6 +45,9 @@ end
 
 function Player:collidesWithEnemy()
     -- Check for collision with enemies specifically
+    if self.stunTimer > 0 then return end -- Prevent collision checks while stunned
+    if not G.ENEMIES then return end -- No enemies to check against
+    
     for _, entity in ipairs(G.ENEMIES) do
         if entity:collides(self.hitbox) then
             self.stunTimer = 0.5 -- stun for 0.5 seconds
