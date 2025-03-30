@@ -1,4 +1,9 @@
 TitleScreen = Object:extend()
+ --[[
+        TitleScreen Class
+        This class handles the title screen functionality in the game.
+        It displays the title, options, and handles user input for navigation.
+    --]]
 
 function TitleScreen:new()
     self.text = {
@@ -20,6 +25,8 @@ function TitleScreen:new()
         "View Commands",
         "Exit :("
     }
+    self.cursor = nil --love.graphics.newImage("assets/sprites/cursor.png")
+    self.cursorScale = 0.5
     self.selectedOption = 1
 end
 
@@ -39,8 +46,8 @@ end
         love.graphics.setColor(1, 1, 1, 1)
         -- love.graphics.setFont(G.fonts.title)
 
-        love.graphics.printf(self.text[1], 0, love.graphics.getHeight()/2 - 50*G.scale, love.graphics.getWidth(), "center")
-        love.graphics.printf(self.text[2], 0, love.graphics.getHeight()/2 - 4*G.scale, love.graphics.getWidth(), "center")
-        love.graphics.printf(self.text[3], 0, love.graphics.getHeight()/2 - 30*G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[1], 0, love.graphics.getHeight()/2 - 60*G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[2], 0, love.graphics.getHeight()/2 - 40*G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[3], 0, love.graphics.getHeight()/2 - 20*G.scale, love.graphics.getWidth(), "center")
     end
 end 
