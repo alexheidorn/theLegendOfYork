@@ -9,10 +9,9 @@ function Enemy:new(x, y, name)
     self.timer = 0
 end
 
-function Enemy:checkCollisionWithPlayer()
-    if self.state == "patrolling" then
-        return self.hitbox:collides(G.PLAYER.hitbox)
-    end
+function Enemy:collidesWithPlayer()
+    local playerHitbox = G.PLAYER.hitbox
+    return self:collides(playerHitbox)
 end
 
 function Enemy:update(dt)
@@ -24,11 +23,12 @@ function Enemy:update(dt)
     end
 
     -- check for collision with player
-    if self:checkCollisionWithPlayer() then
+    if self:collidesWithPlayer() then
         -- handle collision with player (e.g., start battle)
-        G.BATTLE:enterBattle()
+        -- G.BATTLE:enterBattle()       
+        self.direction = -self.direction -- reverse direction on collision
     end
-    
+
     -- simple AI movement: move back & forth
     self:move(self.direction, 0, dt)
 
