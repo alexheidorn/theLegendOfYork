@@ -67,3 +67,17 @@
 - [ ] create battle system
     - [ ] Chronotrigger/Sea of Stars-like battle system with turn based battles IN overworld (no screne transitions)
         - [ ] draw battle UI on top of map
+    - [ ] OR action rpg like battle system
+        - [ ] ie, Xenoblade Chronicles / ffvii remake style
+
+    
+- [ ] create save system
+
+- [ ] create music & sound system
+
+- [ ] reorganize code into modules for better organization
+    - ie, fix file structure
+    - [ ] create characters module for player & enemies
+        - [ ] create sprite & animations file, collision/hitbox/physics file, battle file
+                - [ ] battle file: stats, abilities, equipment, etc
+            - [ ] (for player) inventory file, 
