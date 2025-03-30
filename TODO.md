@@ -33,15 +33,19 @@
 - [x] fix map drawing extra tile at the end of each row
 
 - [x] create keybinds for input
-    - [ ] remove player movement from input handling function
-        - [ ] just return the action that is pressed?    
+    - [x] remove player movement from input handling function
+        - [x] just return the action that is pressed?    
+    - [x] only check for "is pressed" when a key is pressed when in menu's
 
 - [ ] UI
-    - [ ] create pause menu
+    - [x] create pause menu
         - [ ] & settings
         - [ ] add save/load game option
     - [ ] create game over screen
-    - [ ] create title screen
+    - [x] create title screen
+        - [ ] create fade transition out of titlescreen
+        - [ ] add options on titlescreen
+        - [ ] fix jump when transitioning to gameplay
 
 - [ ] create map editor
 
@@ -56,6 +60,7 @@
         - [ ] 
     - [ ] create dialogue system
         - [ ] in dialogue
+    - [ ] smooth out game state checks in code, ie remove all of the if statemenst in the update & draw functions
 
 - [ ] create battle system
     - [ ] Chronotrigger/Sea of Stars-like battle system with turn based battles IN overworld (no screne transitions)
