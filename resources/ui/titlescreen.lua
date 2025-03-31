@@ -66,14 +66,33 @@ function TitleScreen:update(dt)
         self:selectOption()
     elseif G.INPUT:inputPressed("confirm") then
         self:confirmOption()
+    elseif G.INPUT:inputPressed("select") then
+        if G.fullscreen then
+            local newWidth = 1920
+            local newHeight = 1080
+            local fractionW = love.graphics.getWidth()*0.9
+            local fractionH = love.graphics.getHeight()*0.9
+            if fractionW < newWidth then
+                newWidth = fractionW
+            end
+            if fractionH < newHeight then
+                newHeight = fractionH
+            end
+
+            G:setWindowSize(false, newWidth, newHeight)
+        else
+            G:setWindowSize(true)
+        end
+        G:reinitSize()
     end
+
    G.INPUT:update(dt)
 end
 
     function TitleScreen:draw()
     if G.GAME_STATE == G.GAME_STATES.title_screen then
         -- intro text after selecting 'start'
-        love.graphics.setFont(G.fonts.temp2)
+        love.graphics.setFont(G.fonts.temp)
         love.graphics.setColor(1, 1, 1, 1)
         -- love.graphics.setFont(G.fonts.title)
 
