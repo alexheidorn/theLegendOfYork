@@ -3,6 +3,8 @@
 - [x] Add camera
     - [x] zoom camera
         - [ ] now make it less grainy??
+           - [ ] fix empty pixels in map drawing   
+    - [ ] add parallax effect?
     - [ ] camera stops moving when out of bounds
     - [ ] remove camera functions from G:update()
     - [?] fix tiles jittering when camera moves
@@ -15,9 +17,12 @@
 
 - [x] Add collision
     - [x] fix collision - define solid tiles in map or tileset
+    - [x] refactor hitbox as primary movement system
+        - [x] draw sprite on top with correct offset
     - [x] add enemy collision with player
     - [x] fix collision with height/width of entity
         - [ ] create hitbox with rounded corners?
+
 
 - [ ] change map tileset to Zelda-like
 - [x] Put map creation in a separate file
@@ -36,6 +41,7 @@
     - [x] remove player movement from input handling function
         - [x] just return the action that is pressed?    
     - [x] only check for "is pressed" when a key is pressed when in menu's
+    - [ ] fix bug with controller inputs not being read on overworld
 
 - [ ] UI
     - [x] create pause menu
