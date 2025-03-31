@@ -15,7 +15,7 @@
 
 - [x] Add collision
     - [x] fix collision - define solid tiles in map or tileset
-    - [ ] add enemy collision with player
+    - [x] add enemy collision with player
     - [x] fix collision with height/width of entity
         - [ ] create hitbox with rounded corners?
 
