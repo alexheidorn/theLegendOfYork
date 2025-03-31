@@ -67,7 +67,7 @@ function TitleScreen:update(dt)
     elseif G.INPUT:inputPressed("confirm") then
         self:confirmOption()
     end
-   
+   G.INPUT:update(dt)
 end
 
     function TitleScreen:draw()
