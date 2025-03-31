@@ -16,8 +16,8 @@ function Input:new()
         attack = {"key:space", "key:x", "button:y"},
         inventory = {"key:e", "button:x"},
         map = {"key:m", "button:start"},
-        deadzone = 0.3,
     }
+    self.keybinds.deadzone = 0.3 -- Deadzone for joystick axis input
     self.pressedInputs = {}
     self.heldInputs = {}
     self.releasedInputs = {}
@@ -41,16 +41,31 @@ function love.keyreleased(key)
     G.INPUT.heldInputs[key] = nil
 end
 
-function Input:gamepadpressed(joystick, button)
+function love.gamepadpressed(joystick, button)
     G.INPUT.pressedInputs[button] = true
-    G.INPUT.self.heldInputs[button] = true
+    G.INPUT.heldInputs[button] = true
 end
 
-function Input:gamepadreleased(joystick, button) 
+function love.gamepadreleased(joystick, button) 
     G.INPUT.heldInputs[button] = nil
     G.INPUT.releasedInputs[button] = true 
 end
 
+
+function love.gamepadaxis(joystick, axis, value)
+    if math.abs(value) > G.INPUT.keybinds.deadzone then
+        local direction = value > 0 and "+" or "-"
+        local axisKey = axis .. direction
+
+        G.INPUT.pressedInputs[axisKey] = true
+        G.INPUT.heldInputs[axisKey] = true
+    else
+        G.INPUT.releasedInputs[axis .. "+"] = true
+        G.INPUT.releasedInputs[axis .. "-"] = true
+        G.INPUT.heldInputs[axis .. "+"] = nil
+        G.INPUT.heldInputs[axis .. "-"] = nil
+    end
+end
 
 function Input:inputPressed(action)
     if self.keybinds[action] then
@@ -66,7 +81,7 @@ function Input:inputPressed(action)
 end
 
 
-function Input:handleInput(action, joystick)
+function Input:handleInput(action)
     for _, input in ipairs(self.keybinds[action] or {}) do
         local inputType, inputValue = input:match("([^:]+):([^:]+)")
 
@@ -74,13 +89,13 @@ function Input:handleInput(action, joystick)
             return true
         end
 
-        if inputType == "button" and joystick and joystick:isGamepadDown(inputValue) then
+        if inputType == "button" and G.joystick and G.joystick:isGamepadDown(inputValue) then
             return true
         end
 
-        if inputType == "axis" and joystick then
+        if inputType == "axis" and G.joystick then
             local axis, direction = inputValue:match("([^+-]+)([+-])")
-            local axisValue = joystick:getGamepadAxis(axis)
+            local axisValue = G.joystick:getGamepadAxis(axis)
             if (direction == "+" and axisValue > self.keybinds.deadzone) or (direction == "-" and axisValue < -self.keybinds.deadzone) then
                 return true
             end
@@ -112,8 +127,8 @@ function love.gamepadreleased(joystick, button)
     print("Gamepad button released:", button)
 end
 
-function love.gamepadaxis(joystick, axis, value)
-    if math.abs(value) > 0.2 then -- Deadzone to ignore small movements
-        print("Gamepad axis " .. axis .. " moved to " .. value)
-    end
-end
+-- function love.gamepadaxis(joystick, axis, value)
+--     if math.abs(value) > 0.2 then -- Deadzone to ignore small movements
+--         print("Gamepad axis " .. axis .. " moved to " .. value)
+--     end
+-- end
