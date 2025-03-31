@@ -8,11 +8,9 @@ function Game:new()
 end
 
 function Game:load()
-    -- The game's graphics scale up, this method finds the right ratio
-    self.CAM = Camera()
-    self:setScale()
     -- initialize game componenets
-    
+    self.CAM = Camera(0, 0, G.scale)
+    self:loadCam()
     local testMap = Map("lab")
     self.MAP = testMap
 
@@ -42,19 +40,6 @@ function Game:load()
     end
 end
 
-function Game:setScale(input)
-    local windowHeight = love.graphics.getHeight()
-    self.scale = (7.3 / 1200) * windowHeight
-
-    if self.vertical then
-        self.scale = (7 / 1200) * windowHeight
-    end
-
-    if self.CAM then
-        self.CAM:zoomTo(self.scale)
-    end
-end
-
 function Game:update(dt)
     if G.GAME_STATE == G.GAME_STATES.title_screen then
         -- Main menu logic here
@@ -71,32 +56,7 @@ function Game:update(dt)
         entity:update(dt)
     end
     
-    -- camera logic
-    local screenWidth = love.graphics.getWidth()
-    local screenHeight = love.graphics.getHeight()
-    local playerCenterX = self.PLAYER.hitbox.x + self.PLAYER.hitbox.width / 2
-    local playerCenterY = self.PLAYER.hitbox.y + self.PLAYER.hitbox.height / 2
-    self.CAM:lookAt(playerCenterX, playerCenterY)
-    
-    
-    -- Camera boundaries
-    -- Left Boundary
-    -- if Cam.x < screenWidth / 2 then
-    --     Cam.x = screenWidth / 2
-    -- end
-    -- -- Top Boundary
-    -- if Cam.y < screenHeight / 2 then
-    --     Cam.y = screenHeight / 2
-    -- end
-    -- -- Right Boundary
-    -- if Cam.x > self.map.width * self.map.tileSize - screenWidth / 2 then
-    --     Cam.x = self.map.width * self.map.tileSize - screenWidth / 2
-    -- end
-    -- -- Bottom Boundary
-    -- if Cam.y > self.map.height * self.map.tileSize - screenHeight / 2 then
-    --     Cam.y = self.map.height * self.map.tileSize - screenHeight / 2
-    -- end
-    
+    self.updateCam(dt)    
     self.INPUT:update(dt)
 end
 

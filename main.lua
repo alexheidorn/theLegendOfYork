@@ -1,6 +1,5 @@
 -- main.lua
 Object = require 'lib/classic'
-Camera = require 'lib/camera' 
 
 require 'game'
 require 'globals'
@@ -9,6 +8,7 @@ require 'resources/ui/titlescreen'
 require 'assets/sprites'
 require 'lib/input'
 require 'lib/animation'
+require 'lib/cam'
 require 'resources/map'
 require 'resources/entity'
 require 'resources/player'

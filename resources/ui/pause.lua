@@ -73,22 +73,21 @@ function Pause:update(dt)
 end
 
 function Pause:draw()
-    local fontSize = 15*G.scale
-    local tempFont = love.graphics.newFont(fontSize)
-    love.graphics.setFont(tempFont)
+    love.graphics.setFont(G.fonts.temp3)
     if self.paused then
         love.graphics.setColor(0, 0, 0, 0.7 * --[[self.alpha]] 1)
         love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         love.graphics.setColor(1, 1, 1, self.alpha)
-        love.graphics.printf('PAUSE', 0,100, love.graphics.getWidth(), 'center')
-
+        love.graphics.printf('PAUSE', 0, love.graphics.getHeight() / 2 - 100*G.scale, love.graphics.getWidth(), 'center')
+        
+        love.graphics.setFont(G.fonts.temp2)
         for i, option in ipairs(self.menuOptions) do
             if i == self.selectedOption then
                 love.graphics.setColor(1, 1, 1)
             else
                 love.graphics.setColor(0.5, 0.5, 0.5)
             end
-            love.graphics.printf(option, 0, 200 + (i - 1) * 100, love.graphics.getWidth(), 'center')
+            love.graphics.printf(option, 0, love.graphics.getHeight() / 2 + (i - 1) * 50 * G.scale, love.graphics.getWidth(), 'center')
         end
     end
 end
