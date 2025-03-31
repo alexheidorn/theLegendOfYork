@@ -63,9 +63,9 @@ G.asset_atlas = {
 
 -- fonts
 G.fonts = {
-    temp = love.graphics.newFont(G.scale * 15),
-    temp2 = love.graphics.newFont(G.scale * 20),
-    temp3 = love.graphics.newFont(G.scale * 25),
+    temp = love.graphics.newFont(G.scale * 20),
+    temp2 = love.graphics.newFont(G.scale * 25),
+    temp3 = love.graphics.newFont(G.scale * 30),
     -- main = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
     -- title = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
     -- pause = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
