@@ -3,6 +3,7 @@ Camera = require 'lib/camera'
 function Game:loadCam()
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
+    self.CAM.smoother = Camera.smooth.damped(8)
     G.fullscreen = true
     G.testWindow = false
     Game.vertical = false
@@ -48,7 +49,7 @@ function Game:updateCam(dt)
         G.CAM.y = mapHeight - screenHeight / 2
     end
 
-    G.CAM.lockPosition(G.CAM.x, G.CAM.y)
+    G.CAM:lockPosition(G.CAM.x, G.CAM.y)
     G.CAM.x, G.CAM.y = G.CAM:position()
 end
 
@@ -73,10 +74,10 @@ end
 
 function Game:setScale(input)
     local windowHeight = love.graphics.getHeight()
-    G.CAM.scale = (7.3 / 1200) * windowHeight
+    G.scale = (7.3 / 1200) * windowHeight
 
     if G.CAM.vertical then
-        G.CAM.scale = (7 / 1200) * windowHeight
+        G.scale = (7 / 1200) * windowHeight
     end
 
     if G.CAM then

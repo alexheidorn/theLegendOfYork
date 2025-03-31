@@ -10,7 +10,6 @@ end
 function Game:load()
     -- initialize game componenets
     self.CAM = Camera(0, 0, G.scale)
-    G.CAM.smoother = Camera.smooth.damped(8)
     self:loadCam()
     local testMap = Map("lab")
     self.MAP = testMap
