@@ -63,37 +63,39 @@ G.asset_atlas = {
 
 -- fonts
 G.fonts = {
-    temp = love.graphics.newFont(16),
-    main = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
-    title = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
-    pause = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
-    battle = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
-    dialogue = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
-    inventory = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
-    map = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    temp = love.graphics.newFont(G.scale * 15),
+    temp2 = love.graphics.newFont(G.scale * 20),
+    temp3 = love.graphics.newFont(G.scale * 25),
+    -- main = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    -- title = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    -- pause = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    -- battle = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    -- dialogue = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    -- inventory = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
+    -- map = love.graphics.newFont("assets/fonts/PressStart2P.ttf", 16),
 }
 
 -- populate entries in the global asset atlas
 
-for _, atlas in pairs(G.asset_atlas) do
-    local atlasName = atlas.name
-    local atlasPath = atlas.path
-    local atlasTileSize = atlas.tileSize
-    local atlasQuadData = atlas.quadData
-    local atlasSolidTiles = atlas.solidTiles
-    local atlasData = atlas.data
+-- for _, atlas in pairs(G.asset_atlas) do
+--     local atlasName = atlas.name
+--     local atlasPath = atlas.path
+--     local atlasTileSize = atlas.tileSize
+--     local atlasQuadData = atlas.quadData
+--     local atlasSolidTiles = atlas.solidTiles
+--     local atlasData = atlas.data
 
-    G.ASSET_ATLAS[atlasName] = {
-        name = atlasName,
-        path = atlasPath,
-        tileSize = atlasTileSize,
-        quadData = {},
-        solidTiles = atlasSolidTiles,
-        data = atlasData
-    }
+--     G.ASSET_ATLAS[atlasName] = {
+--         name = atlasName,
+--         path = atlasPath,
+--         tileSize = atlasTileSize,
+--         quadData = {},
+--         solidTiles = atlasSolidTiles,
+--         data = atlasData
+--     }
 
-    for _, info in ipairs(atlasQuadData) do
-        -- info[1] = char, info[2] = x, info[3] = y
-        G.ASSET_ATLAS[atlasName].quadData[info[1]] = love.graphics.newQuad(info[2], info[3], atlasTileSize, atlasTileSize, atlasTileSize, atlasTileSize)
-    end
-end
+--     for _, info in ipairs(atlasQuadData) do
+--         -- info[1] = char, info[2] = x, info[3] = y
+--         G.ASSET_ATLAS[atlasName].quadData[info[1]] = love.graphics.newQuad(info[2], info[3], atlasTileSize, atlasTileSize, atlasTileSize, atlasTileSize)
+--     end
+-- end
