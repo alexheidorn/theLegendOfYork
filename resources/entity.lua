@@ -60,6 +60,15 @@ function Entity:setState(newState)
     end
 end
 
+function Entity:getState() return self.state end
+
+function Entity:getX() return self.hitbox.x end
+
+function Entity:getY() return self.hitbox.y end
+
+function Entity:getHitbox() return self.hitbox end
+
+
 function Entity:update(dt)
     self.animation:update(dt)
 
