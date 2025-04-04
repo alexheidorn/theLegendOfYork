@@ -9,7 +9,7 @@ function Input:new()
         down = {"key:s", "key:down", "button:dpdown", "axis:lefty+"},
 
         start = {"key:return", "button:start"},
-        select = {"key:space", "button:select"},
+        select = {"key:space", "button:back"},
         pause = {"key:escape", "key:p", "button:start"},
         confirm = {"key:return", "key:z", "button:a"},
         cancel = {"key:escape", "key:x", "button:b"},
