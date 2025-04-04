@@ -47,13 +47,15 @@ function TitleScreen:deselectOption()
 end
 
 function TitleScreen:confirmOption()
-    if self.selectedOption == 1 then
-        G.GAME_STATE = G.GAME_STATES.gameplay
-    elseif self.selectedOption == 2 then
+    local selectedOption = self.menuOptions[self.selectedOption]
+    if selectedOption == "Start Game" then
+        G.GAME_STATE = G.GAME_STATES.file_select
+        -- Transition to file select screen to start a new game or load an existing one
+    elseif selectedOption == "View Map" then
         G.GAME_STATE = G.GAME_STATES.map
-    elseif self.selectedOption == 3 then
+    elseif selectedOption == "View Commands" then
         G.GAME_STATE = G.GAME_STATES.commands
-    elseif self.selectedOption == 4 then
+    elseif selectedOption == "Exit :(" then
         love.event.quit()
          -- fade out
     end

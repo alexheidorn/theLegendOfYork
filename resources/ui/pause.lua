@@ -54,26 +54,28 @@ function Pause:deselectOption()
 end
 
 function Pause:confirmOption()
-    if self.selectedOption == 1 then
+    local selectedOption = self.menuOptions[self.selectedOption]
+    -- Handle the selected option based on the current state of the pause menu
+    if selectedOption == "Resume" then
         self:close()
-    elseif self.selectedOption == 2 then
+    elseif selectedOption == "Options" then
         -- open options menu
-    elseif self.selectedOption == 3 then
+    elseif selectedOption == "Save" then
         -- save
         G.DATA:save()
-    elseif self.selectedOption == 4 then
+    elseif selectedOption == "Load" then
         -- load
-    elseif self.selectedOption == 5 then
+    elseif selectedOption == "Save & Quit" then
         -- save and quit
         self:close()
         G.DATA:save()
         G.GAME_STATE = G.GAME_STATES.title_screen 
         -- G.TITLE_SCREEN:open()
-    elseif self.selectedOption == 6 then
+    elseif selectedOption == "Return to Title Screen" then
         -- return to title screen
         G.GAME_STATE = G.GAME_STATES.title_screen
         -- G.TITLE_SCREEN:open()
-    elseif self.selectedOption == 7 then
+    elseif selectedOption == "Quit without Saving" then
         -- quit
         love.event.quit()
     end
