@@ -60,6 +60,7 @@ function Pause:confirmOption()
         -- open options menu
     elseif self.selectedOption == 3 then
         -- save
+        G.DATA:save()
     elseif self.selectedOption == 4 then
         -- load
     elseif self.selectedOption == 5 then
