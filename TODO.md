@@ -5,8 +5,8 @@
         - [ ] now make it less grainy??
            - [ ] fix empty pixels in map drawing   
     - [ ] add parallax effect?
-    - [ ] camera stops moving when out of bounds
-    - [ ] remove camera functions from G:update()
+    - [x] camera stops moving when out of bounds
+    - [x] remove camera functions from G:update()
     - [?] fix tiles jittering when camera moves
 
 - [ ] fix enemy movement
@@ -32,7 +32,7 @@
 
 
 - [x] update player animations for all directions
-    - [ ] fix swap to idle animation when not moving
+    - [x] fix swap to idle animation when not moving
     - [ ] finishing playing walk cycle before switching to idle 
 
 - [x] fix map drawing extra tile at the end of each row
@@ -45,7 +45,15 @@
 
 - [ ] UI
     - [x] create pause menu
-        - [ ] & settings
+        - [ ] & settings/options
+            - [ ] options:
+                - [ ] fullscreen
+                - [ ] which monitor
+                - [ ] vertical
+                - [ ] resolution
+                - [ ] volume
+                - [ ] controls
+                    - [ ] change keybinds
         - [ ] add save/load game option
     - [ ] create game over screen
     - [x] create title screen
