@@ -67,23 +67,7 @@ function TitleScreen:update(dt)
     elseif G.INPUT:inputPressed("confirm") then
         self:confirmOption()
     elseif G.INPUT:inputPressed("select") then
-        if G.fullscreen then
-            local newWidth = 1920
-            local newHeight = 1080
-            local fractionW = love.graphics.getWidth()*0.9
-            local fractionH = love.graphics.getHeight()*0.9
-            if fractionW < newWidth then
-                newWidth = fractionW
-            end
-            if fractionH < newHeight then
-                newHeight = fractionH
-            end
-
-            G:setWindowSize(false, newWidth, newHeight)
-        else
-            G:setWindowSize(true)
-        end
-        G:reinitSize()
+        G:toggleFullscreen()
     end
 
    G.INPUT:update(dt)

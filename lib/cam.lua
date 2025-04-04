@@ -4,10 +4,8 @@ function Game:loadCam()
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
     self.CAM.smoother = Camera.smooth.damped(8)
-    G.fullscreen = true
     G.testWindow = false
     Game.vertical = false
-    G:setWindowSize(G.fullscreen, 1920, 1080)
 
     if G.vertical then
         G.fullscreen = false
@@ -16,6 +14,27 @@ function Game:loadCam()
     end
     -- The game's graphics scale up, this method finds the right ratio
     G:setScale()
+end
+
+function Game:toggleFullscreen()
+    if G.fullscreen then
+        local newWidth = 800
+        local newHeight = 600
+        local fractionW = love.graphics.getWidth()*0.9
+        local fractionH = love.graphics.getHeight()*0.9
+        if fractionW < newWidth then
+            newWidth = fractionW
+        end
+        if fractionH < newHeight then
+            newHeight = fractionH
+        end
+
+        G:setWindowSize(false, newWidth, newHeight)
+    else
+        G:setWindowSize(true, 1920, 1080) -- Set to default fullscreen resolution, you can change this to your desired resolution
+    end
+    G.fullscreen = not G.fullscreen
+    G:reinitSize()
 end
 
 function Game:updateCam(dt)
