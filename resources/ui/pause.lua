@@ -12,7 +12,11 @@ function Pause:new()
     self.menuOptions = {
         "Resume",
         "Options",
-        "Quit"
+        "Save",
+        "Load",
+        "Save & Quit",
+        "Return to Title Screen",
+        "Quit without Saving"
     }
     self.selectedOption = 1
 end
@@ -55,6 +59,22 @@ function Pause:confirmOption()
     elseif self.selectedOption == 2 then
         -- open options menu
     elseif self.selectedOption == 3 then
+        -- save
+        G.DATA:save()
+    elseif self.selectedOption == 4 then
+        -- load
+    elseif self.selectedOption == 5 then
+        -- save and quit
+        self:close()
+        G.DATA:save()
+        G.GAME_STATE = G.GAME_STATES.title_screen 
+        -- G.TITLE_SCREEN:open()
+    elseif self.selectedOption == 6 then
+        -- return to title screen
+        G.GAME_STATE = G.GAME_STATES.title_screen
+        -- G.TITLE_SCREEN:open()
+    elseif self.selectedOption == 7 then
+        -- quit
         love.event.quit()
     end
 end
@@ -78,7 +98,7 @@ function Pause:draw()
         love.graphics.setColor(0, 0, 0, 0.7 * --[[self.alpha]] 1)
         love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         love.graphics.setColor(1, 1, 1, self.alpha)
-        love.graphics.printf('PAUSE', 0, love.graphics.getHeight() / 2 - 100*G.scale, love.graphics.getWidth(), 'center')
+        love.graphics.printf('PAUSE', 0, love.graphics.getHeight() / 2 - 20 * G.scale, love.graphics.getWidth(), 'center')
         
         love.graphics.setFont(G.fonts.temp2)
         for i, option in ipairs(self.menuOptions) do
@@ -87,7 +107,7 @@ function Pause:draw()
             else
                 love.graphics.setColor(0.5, 0.5, 0.5)
             end
-            love.graphics.printf(option, 0, love.graphics.getHeight() / 2 + (i - 1) * 50 * G.scale, love.graphics.getWidth(), 'center')
+            love.graphics.printf(option, 0, love.graphics.getHeight() / 2 + (i - 1) * 10 * G.scale, love.graphics.getWidth(), 'center')
         end
     end
 end

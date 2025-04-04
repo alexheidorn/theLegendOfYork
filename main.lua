@@ -3,6 +3,7 @@ Object = require 'lib/classic'
 
 require 'game'
 require 'globals'
+require 'save'
 require 'resources/ui/pause'
 require 'resources/ui/titlescreen'
 require 'assets/sprites'

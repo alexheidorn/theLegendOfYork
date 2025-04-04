@@ -78,6 +78,8 @@
 
     
 - [ ] create save system
+    - [ ] auto save on exit
+    - [ ] decide where to auto save
 
 - [ ] create music & sound system
 

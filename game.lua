@@ -17,6 +17,7 @@ function Game:load()
     self.TITLE_SCREEN = TitleScreen()
     self.PAUSE = Pause()
     self.INPUT = Input() -- instance of Input class
+    self.DATA = Data()
 
     self.PLAYER = Player(64, 64) --starting positon
     self.ENEMIES = { Enemy(200, 100, "log"), Enemy(300, 200, "log") }

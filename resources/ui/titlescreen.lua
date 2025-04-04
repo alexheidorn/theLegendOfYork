@@ -96,9 +96,9 @@ end
         love.graphics.setColor(1, 1, 1, 1)
         -- love.graphics.setFont(G.fonts.title)
 
-        love.graphics.printf(self.text[1], 0, love.graphics.getHeight()/2 - 200*G.scale, love.graphics.getWidth(), "center")
-        love.graphics.printf(self.text[2], 0, love.graphics.getHeight()/2 - 150*G.scale, love.graphics.getWidth(), "center")
-        love.graphics.printf(self.text[3], 0, love.graphics.getHeight()/2 - 100*G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[1], 0, love.graphics.getHeight()/2 - 50 * G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[2], 0, love.graphics.getHeight()/2 - 40 * G.scale, love.graphics.getWidth(), "center")
+        love.graphics.printf(self.text[3], 0, love.graphics.getHeight()/2 - 30 * G.scale, love.graphics.getWidth(), "center")
 
 
         love.graphics.setFont(G.fonts.temp)
@@ -108,7 +108,7 @@ end
             else
                 love.graphics.setColor(0.5, 0.5, 0.5)
             end
-            love.graphics.printf(option, 0, love.graphics.getHeight()/2 + 100 + (i - 1) * 50, love.graphics.getWidth(), 'center')
+            love.graphics.printf(option, 0, love.graphics.getHeight()/2 + 100 + (i - 1) * 10 * G.scale, love.graphics.getWidth(), 'center')
         end
     end
 end 
