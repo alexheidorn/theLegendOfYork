@@ -48,7 +48,10 @@ end
 
 function TitleScreen:confirmOption()
     if self.selectedOption == 1 then
-        G.GAME_STATE = G.GAME_STATES.gameplay
+        -- Open file select menu for loading a game
+        G.FILE_SELECT_MENU = FileSelectMenu("load")
+        G.FILE_SELECT_MENU.returnState = G.GAME_STATES.title_screen
+        G.GAME_STATE = G.GAME_STATES.file_select
     elseif self.selectedOption == 2 then
         G.GAME_STATE = G.GAME_STATES.map
     elseif self.selectedOption == 3 then
