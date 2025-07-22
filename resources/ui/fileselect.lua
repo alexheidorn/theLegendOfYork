@@ -55,7 +55,11 @@ function FileSelectMenu:confirm()
         else
             local loaded = G.DATA:load(self.selectedSlot)
             if loaded then
-                G.GAME_STATE = self.returnState or G.GAME_STATES.gameplay
+                if self.returnState == G.GAME_STATES.title_screen then
+                    G.GAME_STATE = G.GAME_STATES.gameplay
+                else
+                    G.GAME_STATE = self.returnState or G.GAME_STATES.gameplay
+                end
             end
         end
     end
