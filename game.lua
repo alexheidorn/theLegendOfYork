@@ -68,9 +68,8 @@ end
 
 
 function Game:draw()
-    -- If file select is open from title screen, only draw file select menu
-    if G.GAME_STATE == G.GAME_STATES.file_select and G.FILE_SELECT_MENU and G.FILE_SELECT_MENU.returnState == G.GAME_STATES.title_screen then
-        G.TITLE_SCREEN:draw()
+    -- If file select is open, only draw file select menu
+    if G.GAME_STATE == G.GAME_STATES.file_select and G.FILE_SELECT_MENU then
         G.FILE_SELECT_MENU:draw()
         return
     end
@@ -92,10 +91,5 @@ function Game:draw()
     -- HUD
     love.graphics.print("Hello worlf!")
     G.PAUSE:draw()
-
-    -- If file select is open from pause/gameplay, overlay it
-    if G.GAME_STATE == G.GAME_STATES.file_select and G.FILE_SELECT_MENU then
-        G.FILE_SELECT_MENU:draw()
-    end
 end
 
