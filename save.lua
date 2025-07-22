@@ -27,9 +27,38 @@ function Data:save()
     self.saveDate = os.date("%Y-%m-%d", self.timeStamp)
     self.saveTime = os.date("%H:%M:%S", self.timeStamp)
 
-    self.player = nil 
-    self.enemies = nil
-    self.map = nil
+    -- Save player info
+    if G and G.PLAYER then
+        self.player = {
+            x = G.PLAYER.x,
+            y = G.PLAYER.y,
+            hp = G.PLAYER.hp,
+            name = G.PLAYER.name,
+            -- add other relevant player fields here
+        }
+    end
+
+    -- Save enemies info
+    self.enemies = {}
+    if G and G.ENEMIES then
+        for _, enemy in ipairs(G.ENEMIES) do
+            table.insert(self.enemies, {
+                x = enemy.x,
+                y = enemy.y,
+                type = enemy.type,
+                hp = enemy.hp,
+                -- add other relevant enemy fields here
+            })
+        end
+    end
+
+    -- Save map info
+    if G and G.MAP then
+        self.map = {
+            name = G.MAP.name,
+            -- add other relevant map fields here
+        }
+    end
 
     local encoded = json.encode(self, { indent = true })
 
@@ -40,6 +69,34 @@ function Data:save()
     else
         print("Error saving game data: " .. message)
     end
+end
+
+function Data:loadPlayerData()
+    if not G.PLAYER then return end
+    G.PLAYER.x = self.player.x or 0
+    G.PLAYER.y = self.player.y or 0
+    G.PLAYER.hp = self.player.hp or 100
+    G.PLAYER.name = self.player.name or "Player"
+    -- Load other player fields as necessary
+end
+
+function Data:loadEnemiesData()
+    if not G.ENEMIES then return end
+    for i, enemyData in ipairs(self.enemies) do
+        if G.ENEMIES[i] then
+            G.ENEMIES[i].x = enemyData.x or 0
+            G.ENEMIES[i].y = enemyData.y or 0
+            G.ENEMIES[i].type = enemyData.type or "default"
+            G.ENEMIES[i].hp = enemyData.hp or 100
+            -- Load other enemy fields as necessary
+        end
+    end
+end
+
+function Data:loadMapData()
+    if not G.MAP then return end
+    G.MAP.name = self.map.name or "default_map"
+    -- Load other map fields as necessary
 end
 
 function Data:load(fileNumber)
@@ -61,6 +118,10 @@ function Data:load(fileNumber)
         for key, value in pairs(data) do
             self[key] = value
         end
+        -- Load player, enemies, and map data
+        self:loadPlayerData()
+        self:loadEnemiesData()
+        self:loadMapData()
 
         print("Game data loaded from " .. file)
 
