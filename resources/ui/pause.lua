@@ -60,9 +60,15 @@ function Pause:confirmOption()
         -- open options menu
     elseif self.selectedOption == 3 then
         -- save
-        G.DATA:save()
+        G.FILE_SELECT_MENU = FileSelectMenu("save")
+        G.FILE_SELECT_MENU.returnState = G.GAME_STATES.paused
+        G.GAME_STATE = G.GAME_STATES.file_select
+    -- If accessed from gameplay and slot is empty, create new file and start game
     elseif self.selectedOption == 4 then
         -- load
+        G.FILE_SELECT_MENU = FileSelectMenu("load")
+        G.FILE_SELECT_MENU.returnState = G.GAME_STATES.paused
+        G.GAME_STATE = G.GAME_STATES.file_select
     elseif self.selectedOption == 5 then
         -- save and quit
         self:close()
