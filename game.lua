@@ -15,6 +15,7 @@ function Game:load()
     self.MAP = testMap
 
     self.TITLE_SCREEN = TitleScreen()
+    self.FILE_SELECT_MENU = FileSelectMenu()
     self.PAUSE = Pause()
     self.INPUT = Input() -- instance of Input class
     self.DATA = Data()
@@ -52,6 +53,10 @@ function Game:update(dt)
         G.PAUSE:update(dt) 
         return
     end
+    if G.GAME_STATE == G.GAME_STATES.file_select then
+        G.FILE_SELECT_MENU:update(dt)
+        return
+    end
     
     for _, entity in ipairs(self.ENTITIES) do
         entity:update(dt)
@@ -77,5 +82,6 @@ function Game:draw()
     --HUD
     love.graphics.print("Hello worlf!")
     G.PAUSE:draw()
+    G.FILE_SELECT_MENU:draw()
 end
 
