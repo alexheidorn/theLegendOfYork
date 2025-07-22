@@ -46,9 +46,17 @@ function FileSelectMenu:confirm()
         self:refreshSlots()
         G.GAME_STATE = self.returnState or G.GAME_STATES.gameplay
     elseif self.mode == "load" then
-        local loaded = G.DATA:load(self.selectedSlot)
-        if loaded then
-            G.GAME_STATE = self.returnState or G.GAME_STATES.gameplay
+        local slotInfo = self.slotInfo[self.selectedSlot]
+        -- If accessed from title screen and slot is empty, create new file and start game
+        if self.returnState == G.GAME_STATES.title_screen and (not slotInfo or slotInfo.name == "Empty") then
+            G.DATA:createNewFile(self.selectedSlot)
+            self:refreshSlots()
+            G.GAME_STATE = G.GAME_STATES.gameplay
+        else
+            local loaded = G.DATA:load(self.selectedSlot)
+            if loaded then
+                G.GAME_STATE = self.returnState or G.GAME_STATES.gameplay
+            end
         end
     end
 end
