@@ -15,6 +15,7 @@ function Game:load()
     self.MAP = testMap
 
     self.TITLE_SCREEN = TitleScreen()
+    self.FILE_SELECT_MENU = FileSelectMenu()
     self.PAUSE = Pause()
     self.INPUT = Input() -- instance of Input class
     self.DATA = Data()
@@ -52,6 +53,10 @@ function Game:update(dt)
         G.PAUSE:update(dt) 
         return
     end
+    if G.GAME_STATE == G.GAME_STATES.file_select then
+        G.FILE_SELECT_MENU:update(dt)
+        return
+    end
     
     for _, entity in ipairs(self.ENTITIES) do
         entity:update(dt)
@@ -63,18 +68,27 @@ end
 
 
 function Game:draw()
-    G.TITLE_SCREEN:draw()
-    if G.GAME_STATE == G.GAME_STATES.title_screen then return end
-    --camera view
+    -- If file select is open, only draw file select menu
+    if G.GAME_STATE == G.GAME_STATES.file_select and G.FILE_SELECT_MENU then
+        G.FILE_SELECT_MENU:draw()
+        return
+    end
+
+    -- Draw title screen if in title state
+    if G.GAME_STATE == G.GAME_STATES.title_screen then
+        G.TITLE_SCREEN:draw()
+        return
+    end
+
+    -- Draw overworld/gameplay
     self.CAM:attach()
         self.MAP:draw()
         self.PLAYER:draw()
-
         for _, enemy in ipairs(self.ENEMIES) do
             enemy:draw()
         end
     self.CAM:detach()
-    --HUD
+    -- HUD
     love.graphics.print("Hello worlf!")
     G.PAUSE:draw()
 end

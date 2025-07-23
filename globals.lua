@@ -18,11 +18,7 @@ function Game:setGlobals()
         title_screen = 0,
         gameplay = 1,
         paused = 2,
-        inventory = 3,
-        map = 4,
-        dialogue = 5,
-        battle = 6,
-        cutscene = 7,
+        file_select = 3,
     }
     self.GAME_STATE = self.GAME_STATES.title_screen
 

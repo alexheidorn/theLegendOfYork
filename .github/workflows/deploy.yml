@@ -1,0 +1,33 @@
+name: Deploy to Itch.io
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+env:
+  BUILD_DIR: main/makelove-build
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-builds
+
+      - name: Install Butler CLI
+        run: |
+          curl -L https://broth.itch.ovh/butler/linux-amd64-head.tar.gz | tar -xz
+          sudo mv butler /usr/local/bin/
+
+      - name: Deploy builds to Itch.io
+        run: |
+          butler push ${{ env.BUILD_DIR }}/love/*.love ${{ secrets.ITCH_IO_GAME_SLUG }}:love --userversion ${{ github.sha }}
+          butler push ${{ env.BUILD_DIR }}/appimage/* ${{ secrets.ITCH_IO_GAME_SLUG }}:linux --userversion ${{ github.sha }}
+          butler push ${{ env.BUILD_DIR }}/win64/* ${{ secrets.ITCH_IO_GAME_SLUG }}:windows --userversion ${{ github.sha }}
+          butler push ${{ env.BUILD_DIR }}/macos/* ${{ secrets.ITCH_IO_GAME_SLUG }}:macos --userversion ${{ github.sha }}
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_IO_API_KEY }}

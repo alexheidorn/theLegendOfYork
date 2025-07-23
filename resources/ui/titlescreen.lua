@@ -49,6 +49,9 @@ end
 function TitleScreen:confirmOption()
     local selectedOption = self.menuOptions[self.selectedOption]
     if selectedOption == "Start Game" then
+        -- Open file select menu for loading a game
+        G.FILE_SELECT_MENU = FileSelectMenu("load")
+        G.FILE_SELECT_MENU.returnState = G.GAME_STATES.title_screen
         G.GAME_STATE = G.GAME_STATES.file_select
         -- Transition to file select screen to start a new game or load an existing one
     elseif selectedOption == "View Map" then

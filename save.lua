@@ -22,14 +22,52 @@ function Data:createNewFile(fileNumber)
     self:save()
 end
 
+function Data:savePlayerData()
+    if not G.PLAYER then return end
+    self.player = {
+        x = G.PLAYER.hitbox.x,
+        y = G.PLAYER.hitbox.y,
+        hp = G.PLAYER.hp,
+        name = G.PLAYER.name,
+    }
+    -- Add other relevant player fields here
+end
+
+function Data:saveEnemiesData()
+    if not G.ENEMIES then return end
+    self.enemies = {}
+    for _, enemy in ipairs(G.ENEMIES) do
+        table.insert(self.enemies, {
+            x = enemy.hitbox.x,
+            y = enemy.hitbox.y,
+            type = enemy.entity.name,
+            hp = enemy.hp,
+            -- Add other relevant enemy fields here
+        })
+    end
+end
+
+function Data:saveMapData()
+    if not G.MAP then return end
+    self.map = {
+        name = G.MAP.name,
+        -- Add other relevant map fields here
+    }
+end
+
 function Data:save()
+    print("Save directory: " .. love.filesystem.getSaveDirectory())
+
     self.timeStamp = os.time() -- update the timestamp when saving
     self.saveDate = os.date("%Y-%m-%d", self.timeStamp)
     self.saveTime = os.date("%H:%M:%S", self.timeStamp)
 
-    self.player = nil 
-    self.enemies = nil
-    self.map = nil
+    -- Save player info
+    self:savePlayerData()
+    -- Save enemies info
+    self:saveEnemiesData()
+    -- Save map info
+    self:saveMapData()
 
     local encoded = json.encode(self, { indent = true })
 
@@ -40,6 +78,34 @@ function Data:save()
     else
         print("Error saving game data: " .. message)
     end
+end
+
+function Data:loadPlayerData()
+    if not G.PLAYER then return end
+    G.PLAYER.hitbox.x = self.player.x or 0
+    G.PLAYER.hitbox.y = self.player.y or 0
+    G.PLAYER.hp = self.player.hp or 100
+    G.PLAYER.name = self.player.name or "Player"
+    -- Load other player fields as necessary
+end
+
+function Data:loadEnemiesData()
+    if not G.ENEMIES then return end
+    for i, enemyData in ipairs(self.enemies) do
+        if G.ENEMIES[i] then
+            G.ENEMIES[i].hitbox.x = enemyData.x or 0
+            G.ENEMIES[i].hitbox.y = enemyData.y or 0
+            G.ENEMIES[i].type = enemyData.type or "default"
+            G.ENEMIES[i].hp = enemyData.hp or 100
+            -- Load other enemy fields as necessary
+        end
+    end
+end
+
+function Data:loadMapData()
+    if not G.MAP then return end
+    G.MAP.name = self.map.name or "default_map"
+    -- Load other map fields as necessary
 end
 
 function Data:load(fileNumber)
@@ -61,8 +127,13 @@ function Data:load(fileNumber)
         for key, value in pairs(data) do
             self[key] = value
         end
+        -- Load player, enemies, and map data
+        self:loadPlayerData()
+        self:loadEnemiesData()
+        self:loadMapData()
 
         print("Game data loaded from " .. file)
+        print("File Location: " .. love.filesystem.getSaveDirectory())
 
         return data
     else

@@ -1,7 +1,12 @@
 Map = Object:extend()
 
 function Map:new(name)
-    self.atlas = G.asset_atlas[name]
+    self.name = name or "default"
+    self.atlas = G.asset_atlas[self.name] or G.asset_atlas['default']
+    if not self.atlas then
+        error("Atlas not found for map: " .. self.name)
+    end
+    -- self.atlas = G.asset_atlas[self.name]
     self.tileset = love.graphics.newImage(self.atlas.path)
     self.tileSize = self.atlas.tileSize
     local quadData = self.atlas.quadData
