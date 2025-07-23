@@ -1,1 +1,1 @@
-![CI](https://github.com/alexheidorn/theLegendOfYork/actions/workflows/continuous-integration.yml/badge.svg)
+[![continuous-integration](https://github.com/alexheidorn/theLegendOfYork/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/alexheidorn/theLegendOfYork/actions/workflows/build.yml)
