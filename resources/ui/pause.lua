@@ -54,32 +54,33 @@ function Pause:deselectOption()
 end
 
 function Pause:confirmOption()
-    if self.selectedOption == 1 then
+    local selectedOption = self.menuOptions[self.selectedOption]
+    -- Handle the selected option based on the current state of the pause menu
+    if selectedOption == "Resume" then
         self:close()
-    elseif self.selectedOption == 2 then
+    elseif selectedOption == "Options" then
         -- open options menu
-    elseif self.selectedOption == 3 then
+    elseif selectedOption == "Save" then
         -- save
         G.FILE_SELECT_MENU = FileSelectMenu("save")
         G.FILE_SELECT_MENU.returnState = G.GAME_STATES.paused
         G.GAME_STATE = G.GAME_STATES.file_select
     -- If accessed from gameplay and slot is empty, create new file and start game
-    elseif self.selectedOption == 4 then
-        -- load
-        G.FILE_SELECT_MENU = FileSelectMenu("load")
+    elseif selectedOption == "Load" then
+        -- loadG.FILE_SELECT_MENU = FileSelectMenu("load")
         G.FILE_SELECT_MENU.returnState = G.GAME_STATES.paused
         G.GAME_STATE = G.GAME_STATES.file_select
-    elseif self.selectedOption == 5 then
+    elseif selectedOption == "Save & Quit" then
         -- save and quit
         self:close()
         G.DATA:save()
         G.GAME_STATE = G.GAME_STATES.title_screen 
         -- G.TITLE_SCREEN:open()
-    elseif self.selectedOption == 6 then
+    elseif selectedOption == "Return to Title Screen" then
         -- return to title screen
         G.GAME_STATE = G.GAME_STATES.title_screen
         -- G.TITLE_SCREEN:open()
-    elseif self.selectedOption == 7 then
+    elseif selectedOption == "Quit without Saving" then
         -- quit
         love.event.quit()
     end

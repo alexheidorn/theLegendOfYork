@@ -3,8 +3,10 @@
 - [x] Add camera
     - [x] zoom camera
         - [ ] now make it less grainy??
-    - [ ] camera stops moving when out of bounds
-    - [ ] remove camera functions from G:update()
+           - [ ] fix empty pixels in map drawing   
+    - [ ] add parallax effect?
+    - [x] camera stops moving when out of bounds
+    - [x] remove camera functions from G:update()
     - [?] fix tiles jittering when camera moves
 
 - [ ] fix enemy movement
@@ -15,9 +17,12 @@
 
 - [x] Add collision
     - [x] fix collision - define solid tiles in map or tileset
+    - [x] refactor hitbox as primary movement system
+        - [x] draw sprite on top with correct offset
     - [x] add enemy collision with player
     - [x] fix collision with height/width of entity
         - [ ] create hitbox with rounded corners?
+
 
 - [ ] change map tileset to Zelda-like
 - [x] Put map creation in a separate file
@@ -27,7 +32,7 @@
 
 
 - [x] update player animations for all directions
-    - [ ] fix swap to idle animation when not moving
+    - [x] fix swap to idle animation when not moving
     - [ ] finishing playing walk cycle before switching to idle 
 
 - [x] fix map drawing extra tile at the end of each row
@@ -36,10 +41,19 @@
     - [x] remove player movement from input handling function
         - [x] just return the action that is pressed?    
     - [x] only check for "is pressed" when a key is pressed when in menu's
+    - [ ] fix bug with controller inputs not being read on overworld
 
 - [ ] UI
     - [x] create pause menu
-        - [ ] & settings
+        - [ ] & settings/options
+            - [ ] options:
+                - [ ] fullscreen
+                - [ ] which monitor
+                - [ ] vertical
+                - [ ] resolution
+                - [ ] volume
+                - [ ] controls
+                    - [ ] change keybinds
         - [ ] add save/load game option
     - [ ] create game over screen
     - [x] create title screen

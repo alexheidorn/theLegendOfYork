@@ -47,16 +47,18 @@ function TitleScreen:deselectOption()
 end
 
 function TitleScreen:confirmOption()
-    if self.selectedOption == 1 then
+    local selectedOption = self.menuOptions[self.selectedOption]
+    if selectedOption == "Start Game" then
         -- Open file select menu for loading a game
         G.FILE_SELECT_MENU = FileSelectMenu("load")
         G.FILE_SELECT_MENU.returnState = G.GAME_STATES.title_screen
         G.GAME_STATE = G.GAME_STATES.file_select
-    elseif self.selectedOption == 2 then
+        -- Transition to file select screen to start a new game or load an existing one
+    elseif selectedOption == "View Map" then
         G.GAME_STATE = G.GAME_STATES.map
-    elseif self.selectedOption == 3 then
+    elseif selectedOption == "View Commands" then
         G.GAME_STATE = G.GAME_STATES.commands
-    elseif self.selectedOption == 4 then
+    elseif selectedOption == "Exit :(" then
         love.event.quit()
          -- fade out
     end
@@ -70,23 +72,7 @@ function TitleScreen:update(dt)
     elseif G.INPUT:inputPressed("confirm") then
         self:confirmOption()
     elseif G.INPUT:inputPressed("select") then
-        if G.fullscreen then
-            local newWidth = 1920
-            local newHeight = 1080
-            local fractionW = love.graphics.getWidth()*0.9
-            local fractionH = love.graphics.getHeight()*0.9
-            if fractionW < newWidth then
-                newWidth = fractionW
-            end
-            if fractionH < newHeight then
-                newHeight = fractionH
-            end
-
-            G:setWindowSize(false, newWidth, newHeight)
-        else
-            G:setWindowSize(true)
-        end
-        G:reinitSize()
+        G:toggleFullscreen()
     end
 
    G.INPUT:update(dt)

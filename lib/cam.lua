@@ -4,10 +4,12 @@ function Game:loadCam()
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
     self.CAM.smoother = Camera.smooth.damped(8)
-    G.fullscreen = true
     G.testWindow = false
+
+    love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {
+        display = 2
+    } )
     Game.vertical = false
-    G:setWindowSize(G.fullscreen, 1920, 1080)
 
     if G.vertical then
         G.fullscreen = false
@@ -53,14 +55,40 @@ function Game:updateCam(dt)
     G.CAM.x, G.CAM.y = G.CAM:position()
 end
 
-function Game:setWindowSize(full, width, height)
-    if full then
-        G.CAM.fullscreen = true
-        love.window.setFullscreen(true)
-        windowWidth = love.graphics.getWidth()
-        windowHeight = love.graphics.getHeight()
+function Game:toggleFullscreen()
+    if G.fullscreen then
+        local newWidth = 1920
+        local newHeight = 1080 -- Default resolution for windowed mode, can be changed to your desired resolution
+        if G.testWindow then
+            -- If in test mode, use the current window size instead of default resolution
+            newWidth = love.graphics.getWidth()
+            newHeight = love.graphics.getHeight()
+        end
+        local fractionW = love.graphics.getWidth()*0.9
+        local fractionH = love.graphics.getHeight()*0.9
+        if fractionW < newWidth then
+            newWidth = fractionW
+        end
+        if fractionH < newHeight then
+            newHeight = fractionH
+        end
+
+        G:setWindowSize(false, newWidth, newHeight)
     else
-        G.CAM.fullscreen = false
+        G:setWindowSize(true, 1920, 1080)
+    end
+    G:reinitSize()
+end
+
+function Game:setWindowSize(full, width, height)
+    local windowWidth = love.graphics.getWidth()
+    local windowHeight = love.graphics.getHeight()
+    if full then
+        G.fullscreen = true
+        love.window.setFullscreen(true)
+        
+    else
+        G.fullscreen = false
         if width == nil or height == nil then
             windowWidth = 1920
             windowHeight = 1080
@@ -68,7 +96,7 @@ function Game:setWindowSize(full, width, height)
             windowWidth = width
             windowHeight = height
         end
-        love.window.setMode( windowWidth, windowHeight, {resizable = not testWindow} )
+        love.window.setMode( windowWidth, windowHeight, {resizable = not G.testWindow} )
     end
 end
 

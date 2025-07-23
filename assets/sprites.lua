@@ -1,6 +1,6 @@
 -- spritesheets
 G.animation_atli = {
-    player = {name = "player", hitboxWidth = 12, hitboxHeight = 21,
+    player = {name = "player", hitboxWidth = 12, hitboxHeight = 22,
         path = "assets/Zelda-like/character.png", spriteWidth = 16, spriteHeight = 32,
         animations = {
             -- animation frame info for each state
