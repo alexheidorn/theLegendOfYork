@@ -1,0 +1,43 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+  push:
+    tags:
+      - 'v*'
+
+env:
+  BUILD_DIR: main/makelove-build
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-builds
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            Automated build and release from GitHub Actions.
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Upload artifacts to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            release-builds/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
