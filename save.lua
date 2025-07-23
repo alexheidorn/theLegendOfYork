@@ -23,6 +23,8 @@ function Data:createNewFile(fileNumber)
 end
 
 function Data:save()
+    print("Save directory: " .. love.filesystem.getSaveDirectory())
+
     self.timeStamp = os.time() -- update the timestamp when saving
     self.saveDate = os.date("%Y-%m-%d", self.timeStamp)
     self.saveTime = os.date("%H:%M:%S", self.timeStamp)
@@ -30,8 +32,8 @@ function Data:save()
     -- Save player info
     if G and G.PLAYER then
         self.player = {
-            x = G.PLAYER.x,
-            y = G.PLAYER.y,
+            x = G.PLAYER.hitbox.x,
+            y = G.PLAYER.hitbox.y,
             hp = G.PLAYER.hp,
             name = G.PLAYER.name,
             -- add other relevant player fields here
@@ -73,8 +75,8 @@ end
 
 function Data:loadPlayerData()
     if not G.PLAYER then return end
-    G.PLAYER.x = self.player.x or 0
-    G.PLAYER.y = self.player.y or 0
+    G.PLAYER.hitbox.x = self.player.x or 0
+    G.PLAYER.hitbox.y = self.player.y or 0
     G.PLAYER.hp = self.player.hp or 100
     G.PLAYER.name = self.player.name or "Player"
     -- Load other player fields as necessary
@@ -124,6 +126,7 @@ function Data:load(fileNumber)
         self:loadMapData()
 
         print("Game data loaded from " .. file)
+        print("File Location: " .. love.filesystem.getSaveDirectory())
 
         return data
     else
