@@ -93,8 +93,8 @@ function Data:loadEnemiesData()
     if not G.ENEMIES then return end
     for i, enemyData in ipairs(self.enemies) do
         if G.ENEMIES[i] then
-            G.ENEMIES[i].x = enemyData.x or 0
-            G.ENEMIES[i].y = enemyData.y or 0
+            G.ENEMIES[i].hitbox.x = enemyData.x or 0
+            G.ENEMIES[i].hitbox.y = enemyData.y or 0
             G.ENEMIES[i].type = enemyData.type or "default"
             G.ENEMIES[i].hp = enemyData.hp or 100
             -- Load other enemy fields as necessary
