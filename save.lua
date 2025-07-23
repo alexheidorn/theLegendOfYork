@@ -22,6 +22,39 @@ function Data:createNewFile(fileNumber)
     self:save()
 end
 
+function Data:savePlayerData()
+    if not G.PLAYER then return end
+    self.player = {
+        x = G.PLAYER.hitbox.x,
+        y = G.PLAYER.hitbox.y,
+        hp = G.PLAYER.hp,
+        name = G.PLAYER.name,
+    }
+    -- Add other relevant player fields here
+end
+
+function Data:saveEnemiesData()
+    if not G.ENEMIES then return end
+    self.enemies = {}
+    for _, enemy in ipairs(G.ENEMIES) do
+        table.insert(self.enemies, {
+            x = enemy.hitbox.x,
+            y = enemy.hitbox.y,
+            type = enemy.entity.name,
+            hp = enemy.hp,
+            -- Add other relevant enemy fields here
+        })
+    end
+end
+
+function Data:saveMapData()
+    if not G.MAP then return end
+    self.map = {
+        name = G.MAP.name,
+        -- Add other relevant map fields here
+    }
+end
+
 function Data:save()
     print("Save directory: " .. love.filesystem.getSaveDirectory())
 
@@ -30,37 +63,11 @@ function Data:save()
     self.saveTime = os.date("%H:%M:%S", self.timeStamp)
 
     -- Save player info
-    if G and G.PLAYER then
-        self.player = {
-            x = G.PLAYER.hitbox.x,
-            y = G.PLAYER.hitbox.y,
-            hp = G.PLAYER.hp,
-            name = G.PLAYER.name,
-            -- add other relevant player fields here
-        }
-    end
-
+    self:savePlayerData()
     -- Save enemies info
-    self.enemies = {}
-    if G and G.ENEMIES then
-        for _, enemy in ipairs(G.ENEMIES) do
-            table.insert(self.enemies, {
-                x = enemy.x,
-                y = enemy.y,
-                type = enemy.type,
-                hp = enemy.hp,
-                -- add other relevant enemy fields here
-            })
-        end
-    end
-
+    self:saveEnemiesData()
     -- Save map info
-    if G and G.MAP then
-        self.map = {
-            name = G.MAP.name,
-            -- add other relevant map fields here
-        }
-    end
+    self:saveMapData()
 
     local encoded = json.encode(self, { indent = true })
 
